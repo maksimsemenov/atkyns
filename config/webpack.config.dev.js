@@ -1,11 +1,12 @@
-var path = require('path');
-var autoprefixer = require('autoprefixer');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-var WatchMissingNodeModulesPlugin = require('../scripts/utils/WatchMissingNodeModulesPlugin');
-var paths = require('./paths');
-var env = require('./env');
+var path = require('path')
+var autoprefixer = require('autoprefixer')
+var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+var WatchMissingNodeModulesPlugin = require('../scripts/utils/WatchMissingNodeModulesPlugin')
+var paths = require('./paths')
+var env = require('./env')
+const alias = require('./alias')
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -61,7 +62,7 @@ module.exports = {
     // We use `fallback` instead of `root` because we want `node_modules` to "win"
     // if there any conflicts. This matches Node resolution mechanism.
     // https://github.com/facebookincubator/create-react-app/issues/253
-    fallback: paths.nodePaths,
+    fallback: [paths.nodePaths],
     // These are the reasonable defaults supported by the Node ecosystem.
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
@@ -71,14 +72,8 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'
-    }
-  },
-  // Resolve loaders (webpack plugins for CSS, images, transpilation) from the
-  // directory of `react-scripts` itself rather than the project directory.
-  // You can remove this after ejecting.
-  resolveLoader: {
-    root: paths.ownNodeModules,
-    moduleTemplates: ['*-loader']
+    },
+    modulesDirectories: ['node_modules', 'src']
   },
   module: {
     // First, run the linter.
@@ -111,6 +106,7 @@ module.exports = {
       // allow it implicitly so we also enable it.
       {
         test: /\.json$/,
+        exclude: paths.locals,
         loader: 'json'
       },
       // "file" loader makes sure those assets get served by WebpackDevServer.
@@ -131,6 +127,15 @@ module.exports = {
         loader: 'file',
         query: {
           name: 'favicon.ico?[hash:8]'
+        }
+      },
+      // Special case for localization json files
+      {
+        test: /\.json$/,
+        include: paths.locals,
+        loader: 'file',
+        query: {
+          name: 'static/media/[name].[hash:8].[ext]'
         }
       },
       // "url" loader works just like "file" loader but it also embeds
@@ -193,4 +198,4 @@ module.exports = {
     // See https://github.com/facebookincubator/create-react-app/issues/186
     new WatchMissingNodeModulesPlugin(paths.appNodeModules)
   ]
-};
+}

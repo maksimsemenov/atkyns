@@ -1,11 +1,12 @@
-var path = require('path');
-var autoprefixer = require('autoprefixer');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var url = require('url');
-var paths = require('./paths');
-var env = require('./env');
+var path = require('path')
+var autoprefixer = require('autoprefixer')
+var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var url = require('url')
+var paths = require('./paths')
+var env = require('./env')
+const alias = require('./alias')
 
 // Assert this just to be safe.
 // Development builds of React are slow and not intended for production.
@@ -22,7 +23,7 @@ var homepagePath = require(paths.appPackageJson).homepage;
 var publicPath = homepagePath ? url.parse(homepagePath).pathname : '/';
 if (!publicPath.endsWith('/')) {
   // If we don't do this, file assets will get incorrect paths.
-  publicPath += '/';
+  publicPath += '/'
 }
 
 // This is the production configuration.
@@ -66,14 +67,8 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'
-    }
-  },
-  // Resolve loaders (webpack plugins for CSS, images, transpilation) from the
-  // directory of `react-scripts` itself rather than the project directory.
-  // You can remove this after ejecting.
-  resolveLoader: {
-    root: paths.ownNodeModules,
-    moduleTemplates: ['*-loader']
+    },
+    modulesDirectories: ['node_modules', 'constants', 'components']
   },
   module: {
     // First, run the linter.
@@ -228,4 +223,4 @@ module.exports = {
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin('static/css/[name].[contenthash:8].css')
   ]
-};
+}

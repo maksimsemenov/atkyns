@@ -6,6 +6,7 @@
 
 // In the future, we might create a separate list of rules for production.
 // It would probably be more strict.
+const path = require('path')
 
 module.exports = {
   root: true,
@@ -42,6 +43,9 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', '.json']
+      },
+      webpack: {
+        config: path.resolve('./webpack.config.dev.js')
       }
     }
   },

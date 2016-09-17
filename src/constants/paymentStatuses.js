@@ -1,0 +1,2 @@
+export const PAYMENT_NONE = 'PAYMENT_NONE'
+export const PAYMENT_FULL = 'PAYMENT_FULL'
