@@ -1,7 +1,9 @@
 import React, {PropTypes} from 'react'
 import Link from 'react-router/Link'
-import ProgressBar from 'components/ProgressBar/ProgressBar'
+import ProgressCircle from 'components/ProgressCircle/ProgressCircle'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
+import l from 'utils/local'
+import { price } from 'constants/default'
 import './Case.less'
 
 const Case = ({
@@ -12,20 +14,31 @@ const Case = ({
   progress = 0,
   paymentStatuse = PAYMENT_NONE,
   onDownload,
-  linkOptions }) => (
-  <Link {...linkOptions} to={`/${id}/step-${stage}`}>
-    <div className='case'>
-      <div className='case__pName'>{pName}</div>
-      <div className='case__rName'>{rName}</div>
-      <ProgressBar progress={progress} />
-
-    </div>
-  </Link>
-)
+  linkOptions }) => {
+    const buttonPath = `/case-${id}/${paymentStatuse === PAYMENT_NONE ? 'payment' : 'download'}`
+    const buttonLabel = paymentStatuse === PAYMENT_NONE ? `${l('%payment')} - $${price}` : '%download'
+    return (
+      <Link className='case' {...linkOptions} to={`/case-${id}/step-${stage}`}>
+        <ProgressCircle progress={progress} appearance='case' />
+        <div className='case__body'>
+          <div className='case__info'>
+            <div className='case__pName'>{pName}</div>
+            <div className='case__rName'>{rName}</div>
+          </div>
+          <div className='case__controls'>
+            <button
+              to={buttonPath}
+              className={`case__button${progress !== 100 ? ' is-disabled' : ''}`}
+            >{l(buttonLabel)}</button>
+          </div>
+        </div>
+      </Link>
+)}
 
 Case.propTypes = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  pName: PropTypes.string.isRequired,
+  rName: PropTypes.string,
   stage: PropTypes.number,
   progress: PropTypes.number,
   paymentStatuse: PropTypes.oneOf([PAYMENT_NONE, PAYMENT_FULL]),

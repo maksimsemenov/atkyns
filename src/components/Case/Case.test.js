@@ -8,6 +8,6 @@ describe('Case component', () => {
     const linkOptions = {
       isActive: () => false
     }
-    ReactDOM.render(<Case id='dsdsa' name='Case 0' linkOptions={linkOptions} />, div)
+    ReactDOM.render(<Case id='dsdsa' pName='Case 0' linkOptions={linkOptions} />, div)
   })
 })

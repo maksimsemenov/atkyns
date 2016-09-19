@@ -110,7 +110,11 @@ it ('getProgress selector returns correct value', () => {
       }
     }
   })
+  const state2 = fromJS({
+    stage: 0
+  })
   expect(fromCase.getProgress(state)).toBe(50)
+  expect(fromCase.getProgress(state2)).toBe(0)
 })
 it ('getPaymentStatuse selector returns correct value', () => {
   const state = fromJS({

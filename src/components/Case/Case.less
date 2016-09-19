@@ -1,0 +1,92 @@
+@import '~constants/styles.less';
+
+.case {
+  position: relative;
+  box-sizing: border-box;
+  padding: 15px 15px 25px;
+  margin: 10px;
+  min-height: @height-case;
+  flex-basis: ~"calc(20% - 20px)";
+
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+
+  @media (max-width: 800px) {
+    flex-basis: ~"calc(33.3333% - 20px)";
+  }
+
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 3px;
+  //box-shadow: 0 1px 3px 0 fade(#000, 15%);
+  border: 1px solid #ebebeb;
+  transition: border-color @transition-basic, box-shadow @transition-basic;
+  text-decoration: none;
+
+  &:hover {
+    box-shadow: 0 1px 10px 0 fade(@color-accent, 25%);
+    border-color: @color-accent;
+    transition: border-color 0.1s ease, box-shadow 0.3s ease;
+  }
+  &:active {
+    box-shadow: none;
+    border-color: @color-accent-active;
+    transform: translateY(1px);
+  }
+}
+
+.case__body {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.case__pName {
+  font-size: @font-size-basic;
+  font-weight: @font-weight-bold;
+  color: @color-accent;
+  text-decoration: none;
+  transition: color @transition-basic;
+}
+.case__rName {
+  font-size: @font-size-small;
+  font-weight: @font-weight-basic;
+  color: @font-color-basic;
+}
+
+.case__button {
+  position: relative;
+  padding: 8px 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: @font-weight-bold;
+  //min-width: 120px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  border: none;
+
+  color: @font-color-basic;
+  background-color: @color-grey;
+  border-radius: 3px;
+  transition: background-color @transition-basic, color 0.3s ease-out;
+
+  &:hover {
+    background-color: @color-accent;
+    color: #fff;
+  }
+  &:active {
+    background-color: @color-accent-active;
+    color: #fff;
+    transform: translateY(1px);
+  }
+  &:focus {
+    outline-color: @color-accent;
+  }
+  &.is-disabled {
+    color: @font-color-light;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}

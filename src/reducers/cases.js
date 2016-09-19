@@ -5,6 +5,34 @@ import l from 'utils/local'
 import caseReducer, * as fromCase from './case'
 import * as DFN from 'constants/dataFieldNames'
 import { CHANGE_FIELD, ADD_CASE, SET_STAGE, SET_PAYMENT } from 'constants/actionTypes'
+import { PAYMENT_FULL } from 'constants/paymentStatuses'
+
+const testInitialState = {
+  '415rd1wei6o': {
+    stage: 0,
+    payments: PAYMENT_FULL,
+    data: {
+      [DFN.P_FIRST_NAME]: {
+        value: 'Andy'
+      },
+      [DFN.P_FAMILY_NAME]: {
+        value: 'Smith'
+      },
+      [DFN.R_FIRST_NAME]: {
+        value: 'Veronica'
+      },
+      [DFN.R_FAMILY_NAME]: {
+        value: 'Landau'
+      },
+      [DFN.P_GENDER]: {
+        value: ''
+      },
+      [DFN.P_CITY]: {
+        value: ''
+      }
+    }
+  }
+}
 
 const cases = (state = fromJS({}), action) => {
   switch (action.type) {

@@ -6,7 +6,6 @@ var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 var WatchMissingNodeModulesPlugin = require('../scripts/utils/WatchMissingNodeModulesPlugin')
 var paths = require('./paths')
 var env = require('./env')
-const alias = require('./alias')
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -135,7 +134,7 @@ module.exports = {
         include: paths.locals,
         loader: 'file',
         query: {
-          name: 'static/media/[name].[hash:8].[ext]'
+          name: 'static/locals/[name].[hash:8].[ext]'
         }
       },
       // "url" loader works just like "file" loader but it also embeds

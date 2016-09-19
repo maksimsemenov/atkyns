@@ -10,11 +10,14 @@ const NewCase = ({ onClick, ...rest }) => {
     <Link
       to={`/case-${newId}`}
       onClick={() => onClick(newId)}
+      className='newCase'
       {...rest}
     >
-      <div className='newCase'>
-        <div className='newCase__label'>{l('%createCase')}</div>
-      </div>
+      <svg className='newCase__plus' viewBox='0 0 101 101'>
+        <rect x='20' y='50' width='60' height='1' />
+        <rect x='50' y='20' width='1' height='60' />
+      </svg>
+      <div className='newCase__label'>{l('%createCase')}</div>
     </Link>
   )
 }

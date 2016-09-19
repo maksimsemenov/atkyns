@@ -38,9 +38,9 @@ export default caseReducer
 
 export const getStage = (state = fromJS({})) => state.get('stage', 0)
 export const getProgress = (state = fromJS({})) => {
-  const mandatoryFields = state.get('data').filter(field => !field.get('disable')).size
-  const completedFields = state.get('data').filter(field => field.get('value') && field.get('value') !== '').size
-  return Math.floor((completedFields / mandatoryFields) * 100)
+  const mandatoryFields = state.get('data', fromJS({})).filter(field => !field.get('disable')).size
+  const completedFields = state.get('data', fromJS({})).filter(field => field.get('value') && field.get('value') !== '').size
+  return Math.floor((completedFields / mandatoryFields) * 100) || 0
 }
 export const getPaymentStatuse = (state = fromJS({})) => state.get('payment', PAYMENT_NONE)
 export const getData = (state = fromJS({})) => state.get('data', fromJS({})).toJS()

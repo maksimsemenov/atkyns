@@ -5,13 +5,11 @@ import { loadState, saveState } from 'localStorage'
 import reducer from 'reducers'
 
 const configureStore = () => {
-  const persistedState = fromJS(loadState())
+  const persistedState = fromJS({ cases: loadState() })
   const store = createStore(reducer, persistedState)
 
   store.subscribe(throttle(() => {
-    saveState({
-      data: store.getState().toJS()
-    })
+    saveState(store.getState().get('cases').toJS())
   }), 2000)
 
   return store

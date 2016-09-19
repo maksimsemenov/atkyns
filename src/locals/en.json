@@ -1,4 +1,6 @@
 {
   "%case": "Case",
-  "%createCase": "Create case"
+  "%createCase": "Create case",
+  "%payment": "Pay",
+  "%download": "Download"
 }

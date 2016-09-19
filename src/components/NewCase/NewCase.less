@@ -1,0 +1,56 @@
+@import '~constants/styles.less';
+
+.newCase {
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 10px;
+  min-height: @height-case;
+  flex-basis: ~"calc(20% - 20px)";
+
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    flex-basis: ~"calc(33.3333% - 20px)";
+  }
+
+  cursor: pointer;
+  //background-color: #fff;
+  border-radius: 3px;
+  //box-shadow: 0 1px 2px 0 fade(#000, 20%);
+  border: 1px dashed #ddd;
+  transition: border-color @transition-basic;
+  text-decoration: none;
+
+  &:hover {
+    //box-shadow: 0 1px 8px 0 fade(#000, 20%);
+    border-color: @color-accent;
+  }
+}
+
+.newCase__plus {
+  width: 50%;
+  max-width: 80px;
+  fill: lighten(@font-color-light, 10%);
+  transition: fill @transition-basic;
+
+  .newCase:hover & {
+    fill: @color-accent;
+  }
+}
+
+.newCase__label {
+  color: @font-color-light;
+  text-align: center;
+  font-size: @font-size-basic;
+  font-weight: @font-weight-basic;
+
+  transition: color @transition-basic;
+
+  .newCase:hover & {
+    color: @color-accent;
+  }
+}

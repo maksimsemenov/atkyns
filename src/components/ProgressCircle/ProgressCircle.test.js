@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ProgressBar from 'components/ProgressBar/ProgressBar'
+import ProgressBar from 'components/ProgressCircle/ProgressCircle'
 
 describe('Home component', () => {
   it('renders without craches', () => {
