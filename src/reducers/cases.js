@@ -4,7 +4,7 @@ import trim from 'lodash/trim'
 import l from 'utils/local'
 import caseReducer, * as fromCase from './case'
 import * as DFN from 'constants/dataFieldNames'
-import { CHANGE_FIELD, ADD_CASE, SET_STAGE, SET_PAYMENT } from 'constants/actionTypes'
+import { CHANGE_FIELD, ADD_CASE, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'constants/actionTypes'
 import { PAYMENT_FULL } from 'constants/paymentStatuses'
 
 const testInitialState = {
@@ -43,6 +43,10 @@ const cases = (state = fromJS({}), action) => {
     case SET_PAYMENT:
       const { caseId } = action
       return state.set(caseId, caseReducer(state.get(caseId, fromJS({})), action))
+    case DELETE_CASE:
+      return state.setIn([action.caseId, 'deleted'], true)
+    case RESTORE_CASE:
+      return state.setIn([action.caseId, 'deleted'], false)
     default:
       return state
   }
@@ -63,6 +67,7 @@ const caseFields = [
 ]
 
 export const getCaseIdsList = (state = fromJS({})) => state.keySeq().toJS()
+export const getCasesNumber = (state = fromJS({})) => state.size
 export const getCaseStage = (state = fromJS({}), caseId) => fromCase.getStage(state.get(caseId))
 export const getCaseProgress = (state = fromJS({}), caseId) => fromCase.getProgress(state.get(caseId))
 export const getCasePaymentStatuse = (state = fromJS({}), caseId) => fromCase.getPaymentStatuse(state.get(caseId))

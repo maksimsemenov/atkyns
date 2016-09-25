@@ -1,6 +1,16 @@
 {
   "%case": "Case",
-  "%createCase": "Create case",
+  "%createCase": "Add case",
   "%payment": "Pay",
-  "%download": "Download"
+  "%download": "Download",
+  "%homeHeader": "My cases",
+  "%homeHeaderEmpty": "Easy to start",
+  "%paymentTip": "Fill all the data before moving forward",
+
+  "%emptyStepOneTitle": "Create a case",
+  "%emptyStepTwoTitle": "Fill the data",
+  "%emptyStepThreeTitle": "Print and send",
+  "%emptyStepOneText": "Start with creating a new case. You will need one for each of your relatives.",
+  "%emptyStepTwoText": "We will guide you through all forms and explain the meaning of each field and option.",
+  "%emptyStepThreeText": "Step-by-step instructions and checklists will help you to prepare your application."
 }

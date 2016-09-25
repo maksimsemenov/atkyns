@@ -4,26 +4,29 @@ import uniqueKey from 'utils/uniqueKey'
 import l from 'utils/local'
 import './NewCase.less'
 
-const NewCase = ({ onClick, ...rest }) => {
+const NewCase = ({ onClick, isListEmpty = false, ...rest }) => {
   const newId = uniqueKey()
   return (
     <Link
       to={`/case-${newId}`}
       onClick={() => onClick(newId)}
-      className='newCase'
+      className={`newCase${isListEmpty ? ' newCase--emptyList' : ''}`}
       {...rest}
     >
-      <svg className='newCase__plus' viewBox='0 0 101 101'>
-        <rect x='20' y='50' width='60' height='1' />
-        <rect x='50' y='20' width='1' height='60' />
-      </svg>
+      <div className='newCase__frame'>
+        <svg className='newCase__plus' viewBox='0 0 100 100'>
+          <rect x='0' y='49' width='100' height='2' />
+          <rect x='49' y='0' width='2' height='100' />
+        </svg>
+      </div>
       <div className='newCase__label'>{l('%createCase')}</div>
     </Link>
   )
 }
 
 NewCase.propTypes = {
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  isListEmpty: PropTypes.bool
 }
 
 export default NewCase

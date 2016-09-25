@@ -1,0 +1,121 @@
+.printImg {
+  width: 140px;
+}
+
+.printImg__shadow {
+  fill: #D5D1CF;
+  animation: print-in 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+  animation-fill-mode: backwards;
+}
+.printImg__sheet {
+  fill: #ffffff;
+  animation: print-in 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+  animation-fill-mode: backwards;
+}
+.printImg__internalSheet {
+  fill: #E6E3E1;
+  animation: print-in 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) 0.25s;
+  animation-fill-mode: backwards;
+}
+.printImg__fold {
+  stroke: #B7B3B1;
+  animation: stroke 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-fill-mode: forwards;
+}
+.printImg__frame {
+  stroke: #6E6862;
+  animation: stroke 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-fill-mode: forwards;
+}
+.printImg__thin {
+  stroke-width: 0.5;
+}
+
+#print-s-2 {
+  fill: #E1DEDD;
+}
+
+#print-f-1 {
+  stroke-dasharray: 1 1 1 1 1 1 1 1 1 1 1 30;
+  stroke-dashoffset: 30;
+}
+#print-f-2 {
+  stroke-dasharray: 1 1 1 1 1 1 1 1 1 1 1 30;
+  stroke-dashoffset: 30;
+}
+#print-f-3 {
+  stroke-dasharray: 270;
+  stroke-dashoffset: 270;
+}
+#print-f-4 {
+  stroke-dasharray: 330;
+  stroke-dashoffset: 330;
+}
+#print-f-5 {
+  stroke-dasharray: 170;
+  stroke-dashoffset: 170;
+}
+#print-f-6 {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+}
+#print-f-7 {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+}
+
+.printImg__checkmark {
+  fill: #4EA466;
+  animation: print-text 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-fill-mode: backwards;
+  transform-origin: center;
+}
+
+.printImg__text {
+  fill: #6E6862;
+  animation: print-text 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-fill-mode: backwards;
+  transform-origin: center;
+}
+#print-t-0 {
+  animation-delay: 0.4s;
+}
+#print-t-1 {
+  animation-delay: 0.55s;
+}
+#print-t-2 {
+  animation-delay: 0.7s;
+}
+#print-t-3 {
+  animation-delay: 0.85s;
+}
+#print-t-4 {
+  animation-delay: 1.0s;
+}
+
+#print-c-1 {
+  animation-delay: 0.55s;
+}
+#print-c-2 {
+  animation-delay: 0.7s;
+}
+#print-c-3 {
+  animation-delay: 0.85s;
+}
+#print-c-4 {
+  animation-delay: 1.0s;
+}
+
+@keyframes stroke {
+  to {stroke-dashoffset: 0;}
+}
+
+@keyframes print-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes print-text {
+  from {opacity: 0; transform: scale(0.6)}
+  to {opacity: 1; transform: scale(1)}
+}

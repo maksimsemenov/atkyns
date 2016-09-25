@@ -2,40 +2,52 @@
 
 .newCase {
   position: relative;
-  box-sizing: border-box;
-  padding: 20px;
   margin: 10px;
-  min-height: @height-case;
-  flex-basis: ~"calc(20% - 20px)";
+  flex-basis: 70px;
+  width: 70px;
+  flex-shrink: 0;
 
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 800px) {
-    flex-basis: ~"calc(33.3333% - 20px)";
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.newCase__frame {
+  box-sizing: border-box;
+  padding: 5px;
+  height: 90px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 3px;
+  border: 1px dashed lighten(#A4A09D, 10%);
+  transition: border-color @transition-basic;
+
+  .newCase--emptyList & {
+    border-color: lighten(#6E6862, 10%);
   }
 
-  cursor: pointer;
-  //background-color: #fff;
-  border-radius: 3px;
-  //box-shadow: 0 1px 2px 0 fade(#000, 20%);
-  border: 1px dashed #ddd;
-  transition: border-color @transition-basic;
-  text-decoration: none;
-
-  &:hover {
-    //box-shadow: 0 1px 8px 0 fade(#000, 20%);
+  .newCase:hover & {
+    transition: border-color 0.1s ease;
     border-color: @color-accent;
   }
 }
 
 .newCase__plus {
-  width: 50%;
-  max-width: 80px;
-  fill: lighten(@font-color-light, 10%);
+  width: 70%;
+  fill: lighten(#A4A09D, 5%);
   transition: fill @transition-basic;
+
+  .newCase--emptyList & {
+    fill: lighten(#6E6862, 10%);
+  }
 
   .newCase:hover & {
     fill: @color-accent;
@@ -43,14 +55,20 @@
 }
 
 .newCase__label {
-  color: @font-color-light;
+  margin-top: 6px;
+  color: #A4A09D;
   text-align: center;
-  font-size: @font-size-basic;
+  font-size: @font-size-small;
   font-weight: @font-weight-basic;
 
   transition: color @transition-basic;
 
+  .newCase--emptyList & {
+    color: lighten(#6E6862, 0%);
+  }
+
   .newCase:hover & {
     color: @color-accent;
+    transition: color 0.1s ease;
   }
 }

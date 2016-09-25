@@ -1,0 +1,48 @@
+@import '~constants/styles.less';
+
+.emptyCases {
+  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+}
+
+.emptyCases__step {
+  flex-grow: 1;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emptyCases__stepImage {
+  min-height: 200px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.emptyCases__stepTitle {
+  margin: 20px 0 3px;
+  font-size: @font-size-basic;
+  font-weight: @font-weight-bold;
+  color: @font-color-basic;
+  text-align: center;
+  animation: empty-scale-in 0.6s ease-out 1s;
+  animation-fill-mode: backwards;
+}
+.emptyCases__stepText {
+  margin: auto;
+  max-width: 200px;
+  font-size: @font-size-small;
+  font-weight: @font-weight-basic;
+  color: @font-color-basic;
+  text-align: center;
+  animation: empty-scale-in 0.6s ease-out 1.2s;
+  animation-fill-mode: backwards;
+}
+
+@keyframes empty-scale-in {
+  from {opacity: 0; transform: scale(0.6);}
+  to {opacity: 1; transform: scale(1);}
+}

@@ -2,10 +2,10 @@
 
 import type { DataFieldPatchT, DataFieldEffectT } from '../types/DataFieldT'
 
-import { CHANGE_FIELD, ADD_CASE } from 'constants/actionTypes'
+import * as actionTypes from 'constants/actionTypes'
 
 const changeDataField = (caseId: string, fieldName: string, dataPatch: DataFieldPatchT) => (
-  { type: CHANGE_FIELD, caseId, fieldName, dataPatch }
+  { type: actionTypes.CHANGE_FIELD, caseId, fieldName, dataPatch }
 )
 
 export const changeDataFieldThunk = (
@@ -19,4 +19,9 @@ export const changeDataFieldThunk = (
   }
 }
 
-export const addCase = (caseId: string) => ({ type: ADD_CASE, caseId })
+export const addCase = (caseId: string) => ({ type: actionTypes.ADD_CASE, caseId })
+export const deleteCase = (caseId: string) => ({ type: actionTypes.DELETE_CASE, caseId })
+export const restoreCase = (caseId: string) => ({ type: actionTypes.RESTORE_CASE, caseId })
+
+export const setStage = (caseId: string, newStage: string) => ({ type: actionTypes.SET_STAGE, caseId, newStage })
+export const setPayment = (caseId: string, newPaymentStatuse: string) => ({ type: actionTypes.SET_PAYMENT, caseId, newPaymentStatuse })

@@ -30,6 +30,10 @@ const Case = ({
               to={buttonPath}
               className={`case__button${progress !== 100 ? ' is-disabled' : ''}`}
             >{l(buttonLabel)}</button>
+            {progress !== 100 ?
+              <div className='case__tip'>{l('%paymentTip')}</div> :
+              null
+            }
           </div>
         </div>
       </Link>
