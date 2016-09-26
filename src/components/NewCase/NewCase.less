@@ -15,8 +15,17 @@
   cursor: pointer;
   text-decoration: none;
 }
+.newCase--emptyList {
+  margin-top: 40px;
+  animation: newCase-fade-in 0.9s ease-out;
+}
+@keyframes newCase-fade-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
 
 .newCase__frame {
+  position: relative;
   box-sizing: border-box;
   padding: 5px;
   height: 90px;
@@ -31,14 +40,20 @@
   transition: border-color @transition-basic;
 
   .newCase--emptyList & {
-    border-color: lighten(#6E6862, 10%);
+    border: 1px dashed @color-accent; //lighten(#6E6862, 10%);
+    //background-color: @color-accent;
   }
 
   .newCase:hover & {
     transition: border-color 0.1s ease;
     border-color: @color-accent;
   }
+  .newCase.newCase--emptyList:hover & {
+    transition: border-color 0.1s ease;
+    border-color: @color-accent-active;
+  }
 }
+
 
 .newCase__plus {
   width: 70%;
@@ -46,7 +61,7 @@
   transition: fill @transition-basic;
 
   .newCase--emptyList & {
-    fill: lighten(#6E6862, 10%);
+    fill: @color-accent; //#fff; //lighten(#6E6862, 10%);
   }
 
   .newCase:hover & {
@@ -64,7 +79,7 @@
   transition: color @transition-basic;
 
   .newCase--emptyList & {
-    color: lighten(#6E6862, 0%);
+    color: @color-accent; //lighten(#6E6862, 0%);
   }
 
   .newCase:hover & {
