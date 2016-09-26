@@ -3,14 +3,14 @@
 .case {
   position: relative;
   box-sizing: border-box;
-  padding: 15px 10px 25px 15px;
+  padding: 15px 20px 25px 20px;
   margin: 10px;
   min-height: @height-case;
   flex-basis: ~"calc(33.3333% - 20px)";
 
   display: flex;
-  flex-flow: row;
-  flex-wrap: nowrap;
+  flex-flow: column;
+  justify-content: space-between;
 
   @media (max-width: 990px) {
     flex-basis: ~"calc(50% - 20px)";
@@ -53,6 +53,7 @@
   transition: color @transition-basic;
 }
 .case__rName {
+  margin-top: 2px;
   font-size: @font-size-small;
   font-weight: @font-weight-basic;
   color: @font-color-basic;
