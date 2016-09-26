@@ -3,7 +3,7 @@ import values from 'lodash/values'
 import casesReducer, * as fromCases from 'reducers/cases'
 import { initialData} from 'reducers/case'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
-import { ADD_CASE, SET_STAGE, SET_PAYMENT, CHANGE_FIELD } from 'constants/actionTypes'
+import { ADD_CASE, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'constants/actionTypes'
 import * as DFN from 'constants/dataFieldNames'
 
 describe('Cases reducer', () => {
@@ -50,6 +50,66 @@ describe('Cases reducer', () => {
     })
     expect(casesReducer(state, action)).toEqual(nextState)
   })
+  it('handle DELETE_CASE action', () => {
+    const state = fromJS({
+      jlfdsfsd: { deleted: false },
+      lkdeweqw: { deleted: true },
+      daslksal: {}
+    })
+    const action1 = { type: DELETE_CASE, caseId: 'jlfdsfsd' }
+    const action2 = { type: DELETE_CASE, caseId: 'lkdeweqw' }
+    const action3 = { type: DELETE_CASE, caseId: 'daslksal' }
+
+    const nextState1 = fromJS({
+      jlfdsfsd: { deleted: true },
+      lkdeweqw: { deleted: true },
+      daslksal: {}
+    })
+    const nextState2 = fromJS({
+      jlfdsfsd: { deleted: false },
+      lkdeweqw: { deleted: true },
+      daslksal: {}
+    })
+    const nextState3 = fromJS({
+      jlfdsfsd: { deleted: false },
+      lkdeweqw: { deleted: true },
+      daslksal: { deleted: true }
+    })
+
+    expect(casesReducer(state, action1)).toEqual(nextState1)
+    expect(casesReducer(state, action2)).toEqual(nextState2)
+    expect(casesReducer(state, action3)).toEqual(nextState3)
+  })
+  it('handle RESTORE_CASE action', () => {
+    const state = fromJS({
+      jlfdsfsd: { deleted: false },
+      lkdeweqw: { deleted: true },
+      daslksal: {}
+    })
+    const action1 = { type: RESTORE_CASE, caseId: 'jlfdsfsd' }
+    const action2 = { type: RESTORE_CASE, caseId: 'lkdeweqw' }
+    const action3 = { type: RESTORE_CASE, caseId: 'daslksal' }
+
+    const nextState1 = fromJS({
+      jlfdsfsd: { deleted: false },
+      lkdeweqw: { deleted: true },
+      daslksal: {}
+    })
+    const nextState2 = fromJS({
+      jlfdsfsd: { deleted: false },
+      lkdeweqw: { deleted: false },
+      daslksal: {}
+    })
+    const nextState3 = fromJS({
+      jlfdsfsd: { deleted: false },
+      lkdeweqw: { deleted: true },
+      daslksal: { deleted: false }
+    })
+
+    expect(casesReducer(state, action1)).toEqual(nextState1)
+    expect(casesReducer(state, action2)).toEqual(nextState2)
+    expect(casesReducer(state, action3)).toEqual(nextState3)
+  })
 })
 it('getCaseIdsList selector returns correct list', () => {
   const state = fromJS({
@@ -57,6 +117,14 @@ it('getCaseIdsList selector returns correct list', () => {
     fdffewc: { name: 'Victoria'}
   })
   expect(fromCases.getCaseIdsList(state)).toEqual(['dfdafad', 'fdffewc'])
+})
+it('getCasesNumber', () => {
+  const state = fromJS({
+    dfdafad: { name: 'Andy' },
+    fdffewc: { name: 'Victoria'}
+  })
+  expect(fromCases.getCasesNumber(state)).toBe(2)
+  expect(fromCases.getCasesNumber(undefined)).toBe(0)
 })
 it('getCaseStage', () => {
   const state = fromJS({

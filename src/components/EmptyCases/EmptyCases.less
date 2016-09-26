@@ -1,0 +1,87 @@
+@import '~constants/styles.less';
+
+.emptyCases {
+  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  align-items: flex-end;
+}
+
+.emptyCases__step {
+  flex-grow: 1;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.emptyCases__stepImage {
+  min-height: 200px;
+  display: flex;
+  align-items: flex-end;
+  animation: empty-scale-in 1.2s ease;
+  animation-fill-mode: backwards;
+
+  .emptyCases__stepTwo & {
+    animation-delay: 0.2s
+  }
+  .emptyCases__stepThree & {
+    animation-delay: 0.4s
+  }
+}
+
+.emptyCases__stepTitle {
+  margin: 20px 0 3px;
+  font-size: @font-size-basic;
+  font-weight: @font-weight-bold;
+  color: @font-color-basic;
+  text-align: center;
+  animation: empty-move-in 0.8s ease-out;
+  animation-fill-mode: backwards;
+
+  .emptyCases__stepOne & {
+    animation-delay: 0.3s;
+  }
+  .emptyCases__stepTwo & {
+    animation-delay: 0.7s
+  }
+  .emptyCases__stepThree & {
+    animation-delay: 1.1s
+  }
+}
+.emptyCases__stepText {
+  margin: auto;
+  max-width: 200px;
+  font-size: @font-size-small;
+  font-weight: @font-weight-basic;
+  color: @font-color-basic;
+  text-align: center;
+  animation: empty-move-in-2 0.7s ease-out;
+  animation-fill-mode: backwards;
+
+  .emptyCases__stepOne & {
+    animation-delay: 0.4s;
+  }
+  .emptyCases__stepTwo & {
+    animation-delay: 0.8s
+  }
+  .emptyCases__stepThree & {
+    animation-delay: 1.2s
+  }
+}
+
+@keyframes empty-scale-in {
+  from {opacity: 0; transform: scale(0.6);}
+  to {opacity: 1; transform: scale(1);}
+}
+@keyframes empty-move-in {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+@keyframes empty-move-in-2 {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}

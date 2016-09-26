@@ -1,0 +1,77 @@
+.printImg {
+  width: 140px;
+}
+
+.printImg__shadow {
+  fill: #D5D1CF;
+}
+.printImg__sheet {
+  fill: #ffffff;
+}
+.printImg__internalSheet {
+  fill: #E6E3E1;
+}
+.printImg__fold {
+  stroke: #B7B3B1;
+  stroke-dasharray: 1;
+}
+.printImg__frame {
+  stroke: #6E6862;
+}
+.printImg__thin {
+  stroke-width: 0.5;
+}
+
+#print-s-2 {
+  fill: #E1DEDD;
+}
+
+.printImg__checkmark {
+  fill: #4EA466;
+}
+
+.printImg__text {
+  fill: #6E6862;
+}
+#print-t-0 {
+  animation-delay: 0.4s;
+}
+#print-t-1 {
+  animation-delay: 0.55s;
+}
+#print-t-2 {
+  animation-delay: 0.7s;
+}
+#print-t-3 {
+  animation-delay: 0.85s;
+}
+#print-t-4 {
+  animation-delay: 1.0s;
+}
+
+#print-c-1 {
+  animation-delay: 0.55s;
+}
+#print-c-2 {
+  animation-delay: 0.7s;
+}
+#print-c-3 {
+  animation-delay: 0.85s;
+}
+#print-c-4 {
+  animation-delay: 1.0s;
+}
+
+@keyframes stroke {
+  to {stroke-dashoffset: 0;}
+}
+
+@keyframes print-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes print-text {
+  from {opacity: 0; transform: scale(0.6)}
+  to {opacity: 1; transform: scale(1)}
+}

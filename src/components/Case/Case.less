@@ -3,29 +3,32 @@
 .case {
   position: relative;
   box-sizing: border-box;
-  padding: 15px 15px 25px;
+  padding: 15px 20px 25px 20px;
   margin: 10px;
   min-height: @height-case;
-  flex-basis: ~"calc(20% - 20px)";
+  flex-basis: ~"calc(33.3333% - 20px)";
 
   display: flex;
-  flex-flow: row;
-  flex-wrap: nowrap;
+  flex-flow: column;
+  justify-content: space-between;
 
-  @media (max-width: 800px) {
-    flex-basis: ~"calc(33.3333% - 20px)";
+  @media (max-width: 990px) {
+    flex-basis: ~"calc(50% - 20px)";
+  }
+  @media (max-width: 670px) {
+    flex-basis: ~"calc(100% - 20px)";
   }
 
   cursor: pointer;
   background-color: #fff;
   border-radius: 3px;
-  //box-shadow: 0 1px 3px 0 fade(#000, 15%);
-  border: 1px solid #ebebeb;
+  box-shadow: 0 1px 3px 0 fade(#000, 15%);
+  border: 1px solid transparent; //#ededed;
   transition: border-color @transition-basic, box-shadow @transition-basic;
   text-decoration: none;
 
   &:hover {
-    box-shadow: 0 1px 10px 0 fade(@color-accent, 25%);
+    box-shadow: 0 1px 10px 0 fade(@color-accent, 25%), 0 1px 3px 0 fade(#000, 15%);
     border-color: @color-accent;
     transition: border-color 0.1s ease, box-shadow 0.3s ease;
   }
@@ -50,19 +53,29 @@
   transition: color @transition-basic;
 }
 .case__rName {
+  margin-top: 2px;
   font-size: @font-size-small;
   font-weight: @font-weight-basic;
   color: @font-color-basic;
 }
 
+.case__controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
 .case__button {
   position: relative;
-  padding: 8px 20px;
+  box-sizing: border-box;
+  padding: 8px 15px;
+  min-width: 85px;
+  white-space: nowrap;
   text-transform: uppercase;
   text-decoration: none;
   font-size: 10px;
   font-weight: @font-weight-bold;
-  //min-width: 120px;
   text-align: center;
   letter-spacing: 0.05em;
   border: none;
@@ -89,4 +102,13 @@
     opacity: 0.4;
     pointer-events: none;
   }
+}
+
+.case__tip {
+  max-width: 130px;
+  margin-left: 12px;
+  color: @font-color-light;
+  font-weight: @font-weight-basic;
+  font-size: 10px;
+  line-height: 1.3;
 }
