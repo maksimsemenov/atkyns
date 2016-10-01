@@ -4,13 +4,14 @@ import casesReducer, * as fromCases from 'reducers/cases'
 import { initialData} from 'reducers/case'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
 import { ADD_CASE, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'constants/actionTypes'
+import { STAGE_OVERVIEW, STAGE_PETITIONER } from 'constants/stages'
 import * as DFN from 'constants/dataFieldNames'
 
 describe('Cases reducer', () => {
   it('handles ADD_CASE action', () => {
     const nextState = fromJS({
       jlfdsfsd: {
-        stage: 0,
+        stage: STAGE_OVERVIEW,
         payment: PAYMENT_NONE,
         data: initialData(values(DFN))
       }
@@ -118,6 +119,22 @@ it('getCaseIdsList selector returns correct list', () => {
   })
   expect(fromCases.getCaseIdsList(state)).toEqual(['dfdafad', 'fdffewc'])
 })
+it('getActiveCaseIdsList selector returns correct list', () => {
+  const state = fromJS({
+    dfdafad: { data: { name: 'Andy' }, deleted: false },
+    fdffewc: { data: { name: 'Victoria' }, deleted: true },
+    ksaldll: { data: { name: 'Many' }, deleted: false },
+  })
+  expect(fromCases.getActiveCaseIdsList(state)).toEqual(['dfdafad', 'ksaldll'])
+})
+it('getDeletedCaseIdsList selector returns correct list', () => {
+  const state = fromJS({
+    dfdafad: { data: { name: 'Andy' }, deleted: true },
+    fdffewc: { data: { name: 'Victoria' }, deleted: true },
+    ksaldll: { data: { name: 'Many' }, deleted: false },
+  })
+  expect(fromCases.getDeletedCaseIdsList(state)).toEqual(['dfdafad', 'fdffewc'])
+})
 it('getCasesNumber', () => {
   const state = fromJS({
     dfdafad: { name: 'Andy' },
@@ -126,12 +143,30 @@ it('getCasesNumber', () => {
   expect(fromCases.getCasesNumber(state)).toBe(2)
   expect(fromCases.getCasesNumber(undefined)).toBe(0)
 })
+it('getActiveCasesNumber', () => {
+  const state = fromJS({
+    dfdafad: { name: 'Andy' },
+    fdffewc: { name: 'Victoria'},
+    lkdjald: { name: 'Jack', deleted: true}
+  })
+  expect(fromCases.getActiveCasesNumber(state)).toBe(2)
+  expect(fromCases.getActiveCasesNumber(undefined)).toBe(0)
+})
+it('getDeletedCasesNumber', () => {
+  const state = fromJS({
+    dfdafad: { name: 'Andy' },
+    fdffewc: { name: 'Victoria'},
+    lkdjald: { name: 'Jack', deleted: true}
+  })
+  expect(fromCases.getDeletedCasesNumber(state)).toBe(1)
+  expect(fromCases.getDeletedCasesNumber(undefined)).toBe(0)
+})
 it('getCaseStage', () => {
   const state = fromJS({
-    dfdafad: { stage: 3 },
-    fdffewc: { stage: 1 }
+    dfdafad: { stage: STAGE_OVERVIEW },
+    fdffewc: { stage: STAGE_PETITIONER }
   })
-  expect(fromCases.getCaseStage(state, 'dfdafad')).toBe(3)
+  expect(fromCases.getCaseStage(state, 'dfdafad')).toBe(STAGE_OVERVIEW)
 })
 it('getCaseProgress', () => {
   const state = fromJS({
@@ -282,7 +317,7 @@ it('getCaseDataFields', () => {
 it('getCasesList', () => {
   const state = fromJS({
     dkdlasdad: {
-      stage: 1,
+      stage: STAGE_PETITIONER,
       data: {
         pFirstName: {
           value: 'Andy'
@@ -304,7 +339,7 @@ it('getCasesList', () => {
       }
     },
     dkopesdad: {
-      stage: 0,
+      stage: STAGE_OVERVIEW,
       data: {
         pFirstName: {
           value: ''
@@ -319,23 +354,51 @@ it('getCasesList', () => {
           value: ''
         },
       }
+    },
+    orpwesdad: {
+      stage: STAGE_OVERVIEW,
+      deleted: true,
+      data: {
+        pFirstName: {
+          value: 'Sergey'
+        },
+        pFamilyName: {
+          value: 'Lohonev'
+        },
+        rFirstName: {
+          value: ''
+        },
+        rFamilyName: {
+          value: ''
+        },
+      }
     }
   })
-  const casesList = [
+  const activeCasesList = [
     {
       id: 'dkdlasdad',
       pName: 'Andy Smith',
       rName: 'Victoria',
-      stage: 1,
+      stage: STAGE_PETITIONER,
       progress: 100
     },
     {
       id: 'dkopesdad',
       pName: '%case 2',
       rName: '',
-      stage: 0,
+      stage: STAGE_OVERVIEW,
       progress: 0
     }
   ]
-  expect(fromCases.getCasesList(state)).toEqual(casesList)
+  const deletedCasesList = [
+    {
+      id: 'orpwesdad',
+      pName: 'Sergey Lohonev',
+      rName: '',
+      stage: STAGE_OVERVIEW,
+      progress: 50
+    }
+  ]
+  expect(fromCases.getCasesList(state)).toEqual(activeCasesList)
+  expect(fromCases.getCasesList(state, true)).toEqual(deletedCasesList)
 })

@@ -5,12 +5,21 @@
   "%download": "Download",
   "%homeHeader": "My cases",
   "%homeHeaderEmpty": "Easy to start",
+  "%trashHeader": "Trash",
   "%paymentTip": "Fill all the data before moving forward",
+
+  "%trashTitle": "Trash",
+  "%restoreCase": "Restore",
 
   "%emptyStepOneTitle": "Create a case",
   "%emptyStepTwoTitle": "Fill the data",
   "%emptyStepThreeTitle": "Print and send",
   "%emptyStepOneText": "Start with creating a new case. You will need one for each of your relatives.",
   "%emptyStepTwoText": "We will guide you through all forms and explain the meaning of each field and option.",
-  "%emptyStepThreeText": "Step-by-step instructions and checklists will help you to prepare your application."
+  "%emptyStepThreeText": "Step-by-step instructions and checklists will help you to prepare your application.",
+
+  "%stage-overview": "Overview",
+  "%sOverview-iam": "I am a",
+  "%sOverview-iapply": " and I apply for my",
+  "%sOverview-wholives": "who lives"
 }

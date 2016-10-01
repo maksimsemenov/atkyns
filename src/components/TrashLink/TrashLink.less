@@ -1,0 +1,50 @@
+@import '~constants/styles.less';
+
+.trashLink {
+  position: fixed;
+  z-index: 1;
+  top: 30px;
+  right: 30px;
+  //width: 16px;
+  //height: 16px;
+  padding: 0;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: none;
+  text-decoration: none;
+
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.trashLink__icon {
+  width: 39px;
+  margin-bottom: 8px;
+  fill: @color-dark-grey;
+  transition: fill @transition-basic;
+
+  .trashLink:hover & {
+    fill: @color-accent;
+    transition: fill @transition-active;
+  }
+}
+.trashLink__title {
+  font-size: @font-size-small;
+  color: @font-color-light;
+  transition: color @transition-basic;
+
+  .trashLink:hover & {
+    color: @color-accent;
+    transition: color @transition-active;
+  }
+}

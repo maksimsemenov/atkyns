@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable'
 import values from 'lodash/values'
-import { CHANGE_FIELD, SET_STAGE, SET_PAYMENT } from 'constants/actionTypes'
+import { CHANGE_FIELD, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'constants/actionTypes'
+import { STAGE_OVERVIEW } from 'constants/stages'
 import { PAYMENT_NONE } from 'constants/paymentStatuses'
 import * as DFN from 'constants/dataFieldNames'
 
@@ -11,7 +12,7 @@ export const initialData = (fields) => (
   }, {})
 )
 export const initialState = (fieldMap) => fromJS({
-  stage: 0,
+  stage: STAGE_OVERVIEW,
   payment: PAYMENT_NONE,
   data: initialData(values(fieldMap))
 })
@@ -25,6 +26,10 @@ const caseReducer = (state = initialState(DFN), action = {}) => {
       return state.set('stage', action.newStage)
     case SET_PAYMENT:
       return state.set('payment', action.newPaymentStatuse)
+    case DELETE_CASE:
+      return state.set('deleted', true)
+    case RESTORE_CASE:
+      return state.set('deleted', false)
     default:
       return state
   }

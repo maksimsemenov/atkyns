@@ -1,11 +1,12 @@
 import { fromJS } from 'immutable'
 import caseReducer, * as fromCase from 'reducers/case'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
-import { CHANGE_FIELD, SET_STAGE, SET_PAYMENT } from 'constants/actionTypes'
+import { CHANGE_FIELD, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'constants/actionTypes'
+import { STAGE_OVERVIEW } from 'constants/stages'
 
 describe('Case reducer', () => {
   it('returns state for default action', () => {
-    const state = fromJS({ stage: 0 })
+    const state = fromJS({ stage: STAGE_OVERVIEW })
     expect(caseReducer(state, {})).toEqual(state)
   })
   it('handles CHANGE_FIELD action', () => {
@@ -52,7 +53,7 @@ describe('Case reducer', () => {
     expect(caseReducer(state, action2)).toEqual(nextState2)
   })
   it('handles SET_STAGE action', () => {
-    const state = fromJS({ stage: 0 })
+    const state = fromJS({ stage: STAGE_OVERVIEW })
     const action = { type: SET_STAGE, newStage: 1 }
     expect(caseReducer(state, action)).toEqual(fromJS({ stage: 1 }))
   })
@@ -60,6 +61,16 @@ describe('Case reducer', () => {
     const state = fromJS({ payment: PAYMENT_NONE })
     const action = { type: SET_PAYMENT, newPaymentStatuse: PAYMENT_FULL }
     expect(caseReducer(state, action)).toEqual(fromJS({ payment: PAYMENT_FULL }))
+  })
+  it('handle DELETE_CASE action', () => {
+    const state = fromJS({ deleted: false })
+    const action = { type: DELETE_CASE }
+    expect(caseReducer(state, action)).toEqual(fromJS({ deleted: true }))
+  })
+  it('handle RESTORE_CASE action', () => {
+    const state = fromJS({ deleted: true })
+    const action = { type: RESTORE_CASE }
+    expect(caseReducer(state, action)).toEqual(fromJS({ deleted: false }))
   })
 })
 describe('Case initialState function', () => {
@@ -70,7 +81,7 @@ describe('Case initialState function', () => {
       RES_THROUGH_ADOPTION: 'resThroughAdoption'
     }
     const nextState = fromJS({
-      stage: 0,
+      stage: STAGE_OVERVIEW,
       payment: PAYMENT_NONE,
       data: {
         relashionship: {
@@ -92,9 +103,9 @@ describe('Case initialState function', () => {
 })
 it ('getStage selector returns correct value', () => {
   const state = fromJS({
-    stage: 34
+    stage: STAGE_OVERVIEW
   })
-  expect(fromCase.getStage(state)).toBe(34)
+  expect(fromCase.getStage(state)).toBe(STAGE_OVERVIEW)
 })
 it ('getProgress selector returns correct value', () => {
   const state = fromJS({
@@ -111,7 +122,7 @@ it ('getProgress selector returns correct value', () => {
     }
   })
   const state2 = fromJS({
-    stage: 0
+    stage: STAGE_OVERVIEW
   })
   expect(fromCase.getProgress(state)).toBe(50)
   expect(fromCase.getProgress(state2)).toBe(0)
