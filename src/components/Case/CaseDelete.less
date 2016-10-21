@@ -1,0 +1,35 @@
+@import '~constants/styles.less';
+
+.caseDelete {
+  position: absolute;
+  z-index: 1;
+  top: 15px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.caseDelete__icon {
+  width: 13px;
+  fill: @color-dark-grey;
+  transition: fill @transition-basic;
+
+  .caseDelete:hover & {
+    fill: @color-red;
+    transition: fill @transition-active;
+  }
+}
