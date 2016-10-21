@@ -11,12 +11,11 @@ type DataFieldOptionT = {
   value: string,
 }
 export type DataFieldPatchT = {
-  value?: string | number,
-  disable?: boolean,
+  value: ?string | number | boolean,
 }
 export type DataFieldEffectT = {
   fieldName: string,
-  effect: (newProps: DataFieldPatchT) => DataFieldPatchT // eslint-disable-line no-use-before-define
+  effect: (newProps: DataFieldPatchT) => DataFieldPatchT
 }
 
 export type DataFieldT = {
