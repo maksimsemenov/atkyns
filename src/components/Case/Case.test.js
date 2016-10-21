@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import BrowserRouter from 'react-router/BrowserRouter'
 import Case from 'components/Case/Case'
 
 describe('Case component', () => {
@@ -8,6 +9,16 @@ describe('Case component', () => {
     const linkOptions = {
       isActive: () => false
     }
-    ReactDOM.render(<Case id='dsdsa' pName='Case 0' linkOptions={linkOptions} />, div)
+    ReactDOM.render(
+      <BrowserRouter>
+        <Case
+        id='dsdsa'
+        pName='Case 0'
+        linkOptions={linkOptions}
+        onCaseDelete={() => {}}
+        />
+      </BrowserRouter>,
+      div
+    )
   })
 })
