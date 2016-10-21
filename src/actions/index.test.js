@@ -1,4 +1,4 @@
-import { changeDataFieldThunk } from 'actions/data'
+import { changeDataFieldThunk } from 'actions'
 
 describe('Data field Actions', () => {
   it('emits events for action effects', () => {

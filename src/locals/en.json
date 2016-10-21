@@ -19,6 +19,10 @@
   "%emptyStepThreeText": "Step-by-step instructions and checklists will help you to prepare your application.",
 
   "%stage-overview": "Overview",
+  "%stage-relative": "Relative",
+  "%stage-petitioner": "Petitioner",
+  "%stage-petition": "Petition",
+  
   "%sOverview-iam": "I am a",
   "%sOverview-iapply": " and I apply for my",
   "%sOverview-wholives": "who lives"

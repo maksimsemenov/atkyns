@@ -1,4 +1,4 @@
-require('utils/l10n.min.js') // add lazy localisation
+import 'utils/l10n.min.js' // add lazy localisation
 
 import React from 'react'
 import ReactDOM from 'react-dom'

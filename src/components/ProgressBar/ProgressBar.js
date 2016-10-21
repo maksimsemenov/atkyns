@@ -16,7 +16,7 @@ const ProgressBar = ({ progress = 0, appearance = 'default' }) => {
 
 ProgressBar.propTypes = {
   progress: PropTypes.number,
-  appearance: PropTypes.oneOf(['default', 'case'])
+  appearance: PropTypes.oneOf(['default', 'case', 'form'])
 }
 
 export default ProgressBar

@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { DataFieldPatchT, DataFieldEffectT } from '../types/DataFieldT'
+import type { DataFieldPatchT, DataFieldEffectT } from 'types/DataFieldT'
 
 import * as actionTypes from 'constants/actionTypes'
 
@@ -12,7 +12,7 @@ export const changeDataFieldThunk = (
   caseId: string,
   fieldName: string,
   dataPatch: DataFieldPatchT,
-  effects: DataFieldEffectT[]) => (dispatch) => {
+  effects: DataFieldEffectT[]) => (dispatch: any) => {
   dispatch(changeDataField(caseId, fieldName, dataPatch))
   if (effects) {
     effects.forEach((ef) => dispatch(changeDataField(caseId, ef.fieldName, ef.effect(dataPatch))))

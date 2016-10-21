@@ -4,11 +4,11 @@ import Case from 'components/Case/Case'
 import NewCase from 'components/NewCase/NewCase'
 import EmptyCases from 'components/EmptyCases/EmptyCases'
 import { getCasesList } from 'reducers'
-import { addCase } from 'actions/data'
+import { addCase, deleteCase } from 'actions'
 
 import './Cases.less'
 
-const Cases = ({ cases = [], onAddCase }) => {
+const Cases = ({ cases = [], deleted = false, onAddCase, ...rest }) => {
   const empty = cases.length === 0
   return (
     <div className='cases'>
@@ -18,6 +18,7 @@ const Cases = ({ cases = [], onAddCase }) => {
           {cases.map(caseData => (
             <Case
               {...caseData}
+              {...rest}
               key={caseData.id}
             />
           ))}
@@ -29,15 +30,21 @@ const Cases = ({ cases = [], onAddCase }) => {
 )}
 
 Cases.propTypes = {
+  deleted: PropTypes.bool,
   cases: PropTypes.array,
-  onAddCase: PropTypes.func.isRequired
+  onAddCase: PropTypes.func.isRequired,
+  onCaseDelete: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   cases: getCasesList(state)
 })
 const mapDispatchToProps = (dispatch) => ({
-  onAddCase: (newId) => dispatch(addCase(newId))
+  onAddCase: (newId) => dispatch(addCase(newId)),
+  onCaseDelete: (caseId) => {
+    console.log('Delete case', caseId)
+    dispatch(deleteCase(caseId))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cases)
