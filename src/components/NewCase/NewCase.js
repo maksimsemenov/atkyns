@@ -2,16 +2,16 @@ import React, { PropTypes } from 'react'
 import Link from 'react-router/Link'
 import uniqueKey from 'utils/uniqueKey'
 import l from 'utils/local'
+import { STAGE_OVERVIEW } from 'constants/stages'
 import './NewCase.less'
 
-const NewCase = ({ onClick, isListEmpty = false, ...rest }) => {
+const NewCase = ({ onClick, isListEmpty = false }) => {
   const newId = uniqueKey()
   return (
     <Link
-      to={`/case-${newId}`}
+      to={`/case/${newId}/${STAGE_OVERVIEW}`}
       onClick={() => onClick(newId)}
       className={`newCase${isListEmpty ? ' newCase--emptyList' : ''}`}
-      {...rest}
     >
       <div className='newCase__frame'>
         <svg className='newCase__plus' viewBox='0 0 100 100'>

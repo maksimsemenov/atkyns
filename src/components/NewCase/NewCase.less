@@ -26,6 +26,7 @@
 
 .newCase__frame {
   position: relative;
+  z-index: 1;
   box-sizing: border-box;
   padding: 5px;
   height: 90px;
@@ -44,6 +45,7 @@
     //background-color: @color-accent;
   }
 
+
   .newCase:hover & {
     transition: border-color 0.1s ease;
     border-color: @color-accent;
@@ -56,6 +58,8 @@
 
 
 .newCase__plus {
+  position: relative;
+  z-index: 1;
   width: 70%;
   fill: lighten(#A4A09D, 5%);
   transition: fill @transition-basic;
