@@ -12,45 +12,25 @@ describe('Case reducer', () => {
   it('handles CHANGE_FIELD action', () => {
     const state = fromJS({
       data: {
-        firstName: {
-          value: '',
-          disable: false
-        }
+        petitioner: {}
       }
     })
     const action1 = {
       type: CHANGE_FIELD,
-      fieldName: 'firstName',
-      dataPatch: {
-        value: 'Andy'
-      }
-    }
-    const action2 = {
-      type: CHANGE_FIELD,
-      fieldName: 'firstName',
-      dataPatch: {
-        disable: true
-      }
+      fieldName: 'petitioner/name/first',
+      dataPatch: 'Andy'
     }
     const nextState1 = fromJS({
       data: {
-        firstName: {
-          value: 'Andy',
-          disable: false
-        }
-      }
-    })
-    const nextState2 = fromJS({
-      data: {
-        firstName: {
-          value: '',
-          disable: true
+        petitioner: {
+          name: {
+            first: 'Andy'
+          }
         }
       }
     })
 
     expect(caseReducer(state, action1)).toEqual(nextState1)
-    expect(caseReducer(state, action2)).toEqual(nextState2)
   })
   it('handles SET_STAGE action', () => {
     const state = fromJS({ stage: STAGE_OVERVIEW })
@@ -163,41 +143,38 @@ it ('getData selector returns correct value', () => {
 it ('getDataField selector returns correct value', () => {
   const state = fromJS({
     data: {
-      firstName: {
-        value: 'Andy'
-      },
-      familyName: {
-        value: ''
-      },
-      middleName: {
-        disable: true
+      petitioner: {
+        name: {
+          first: 'Andy',
+          family: '',
+          middle: 'Verning'
+        }
       }
     }
   })
-  expect(fromCase.getDataField(state, 'firstName')).toBe('Andy')
+  expect(fromCase.getDataField(state, 'petitioner/name/first')).toBe('Andy')
 })
 it ('getDataFields selector returns correct value', () => {
   const state = fromJS({
     data: {
-      firstName: {
-        value: 'Andy'
-      },
-      familyName: {
-      },
-      middleName: {
-        value: 'Larry',
-        disable: true
-      },
-      age: {
-        value: ''
+      petitioner: {
+        name: {
+          first: 'Andy',
+          family: '',
+          middle: 'Larry'
+        }
       }
     }
   })
-  const fields = ['firstName', 'familyName', 'age']
+  const fields = [
+    'petitioner/name/first',
+    'petitioner/name/family',
+    'petitioner/name/middle'
+  ]
   const data = {
-    firstName: 'Andy',
-    familyName: '',
-    age: ''
+    'petitioner/name/first': 'Andy',
+    'petitioner/name/family': '',
+    'petitioner/name/middle': 'Larry'
   }
   expect(fromCase.getDataFields(state, fields)).toEqual(data)
 })
