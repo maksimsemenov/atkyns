@@ -256,61 +256,70 @@ it('getCaseDataField', () => {
   const state = fromJS({
     dfdafad: {
       data: {
-        firstName: {
-          value: 'Andy'
-        },
-        familyName: {
-          value: ''
-        },
-        middleName: {
-          disable: true
+        petitioner: {
+          name: {
+            first: 'Andy',
+            family: '',
+            middle: 'Largo'
+          }
         }
       }
     },
     fdffewc: {
       data: {
-        firstName: {
-          value: 'Bill'
-        },
-        familyName: {
-          value: 'Smith'
-        },
+        relative: {
+          name: {
+            first: 'Olef',
+            family: 'Gilbert'
+          }
+        }
       }
     }
   })
-  expect(fromCases.getCaseDataField(state, 'dfdafad', 'firstName')).toEqual('Andy')
-  expect(fromCases.getCaseDataField(state, 'fdffewc', 'firstName')).toEqual('Bill')
+  expect(fromCases.getCaseDataField(state, 'dfdafad', 'petitioner/name/first')).toEqual('Andy')
+  expect(fromCases.getCaseDataField(state, 'fdffewc', 'relative/name/family')).toEqual('Gilbert')
 })
 it('getCaseDataFields', () => {
   const state = fromJS({
     dfdafad: {
       data: {
-        firstName: {
-          value: 'Andy'
+        petitioner: {
+          name: {
+            first: 'Andy',
+            family: '',
+            middle: 'Largo'
+          }
         },
-        familyName: {
-          value: ''
-        },
-        middleName: {
-          disable: true
+        relative: {
+          name: {
+            first: 'Olef',
+            family: 'Gilbert'
+          }
         }
       }
     },
     fdffewc: {
       data: {
-        firstName: {
-          value: 'Bill'
+        petitioner: {
+          name: {
+            first: 'Andy',
+            family: '',
+            middle: 'Largo'
+          }
         },
-        familyName: {
-          value: 'Smith'
-        },
+        relative: {
+          name: {
+            first: 'Olef',
+            family: 'Gilbert'
+          }
+        }
       }
     }
   })
-  const fields = ['firstName', 'middleName']
+  const fields = ['petitioner/name/first', 'relative/name/family']
   const data = {
-    firstName: 'Andy',
-    middleName: ''
+    'petitioner/name/first': 'Andy',
+    'relative/name/family': 'Gilbert'
   }
   expect(fromCases.getCaseDataFields(state, 'dfdafad', fields)).toEqual(data)
 })
@@ -319,58 +328,34 @@ it('getCasesList', () => {
     dkdlasdad: {
       stage: STAGE_PETITIONER,
       data: {
-        pFirstName: {
-          value: 'Andy'
+        petitioner: {
+          name: {
+            first: 'Andy',
+            family: 'Smith'
+          }
         },
-        pFamilyName: {
-          value: 'Smith'
-        },
-        rFirstName: {
-          value: 'Victoria'
-        },
-        rFamilyName: {
-          value: '',
-          disable: true
-        },
-        pMiddleName: {
-          value: '',
-          disable: true
+        relative: {
+          name: {
+            first: 'Victoria',
+            family: ''
+          }
         }
       }
     },
     dkopesdad: {
       stage: STAGE_OVERVIEW,
-      data: {
-        pFirstName: {
-          value: ''
-        },
-        pFamilyName: {
-          value: ''
-        },
-        rFirstName: {
-          value: ''
-        },
-        rFamilyName: {
-          value: ''
-        },
-      }
+      data: {}
     },
     orpwesdad: {
       stage: STAGE_OVERVIEW,
       deleted: true,
       data: {
-        pFirstName: {
-          value: 'Sergey'
-        },
-        pFamilyName: {
-          value: 'Lohonev'
-        },
-        rFirstName: {
-          value: ''
-        },
-        rFamilyName: {
-          value: ''
-        },
+        petitioner: {
+          name: {
+            first: 'Sergey',
+            family: 'Lohonev'
+          }
+        }
       }
     }
   })
@@ -379,15 +364,13 @@ it('getCasesList', () => {
       id: 'dkdlasdad',
       pName: 'Andy Smith',
       rName: 'Victoria',
-      stage: STAGE_PETITIONER,
-      progress: 100
+      stage: STAGE_PETITIONER
     },
     {
       id: 'dkopesdad',
       pName: '%case 2',
       rName: '',
-      stage: STAGE_OVERVIEW,
-      progress: 0
+      stage: STAGE_OVERVIEW
     }
   ]
   const deletedCasesList = [
@@ -395,8 +378,7 @@ it('getCasesList', () => {
       id: 'orpwesdad',
       pName: 'Sergey Lohonev',
       rName: '',
-      stage: STAGE_OVERVIEW,
-      progress: 50
+      stage: STAGE_OVERVIEW
     }
   ]
   expect(fromCases.getCasesList(state)).toEqual(activeCasesList)
