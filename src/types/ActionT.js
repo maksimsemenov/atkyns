@@ -2,7 +2,7 @@
 import type { DataFieldPatchT } from './DataFieldT'
 
 export type ActionT = {
-  type?: string,
+  type: string,
   caseId?: string,
   fieldName?: string,
   dataPatch?: DataFieldPatchT

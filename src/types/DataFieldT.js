@@ -10,9 +10,8 @@ type DataFieldTypeT =
 type DataFieldOptionT = {
   value: string,
 }
-export type DataFieldPatchT = {
-  value: ?string | number | boolean,
-}
+export type DataFieldPatchT = ?string | number | boolean
+
 export type DataFieldEffectT = {
   fieldName: string,
   effect: (newProps: DataFieldPatchT) => DataFieldPatchT
