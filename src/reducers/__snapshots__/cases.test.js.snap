@@ -1,0 +1,53 @@
+exports[`test addCase action creator 1`] = `
+Object {
+  "caseId": "dsadhaskld",
+  "type": "ADD_CASE"
+}
+`;
+
+exports[`test deleteCase action creator 1`] = `
+Object {
+  "caseId": "dsadhaskld",
+  "type": "DELETE_CASE"
+}
+`;
+
+exports[`test removeFieldError action creator 1`] = `
+Object {
+  "caseId": "dsadhaskld",
+  "fieldName": "petitioner.name.first",
+  "type": "REMOVE_FIELD_ERROR"
+}
+`;
+
+exports[`test restoreCase action creator 1`] = `
+Object {
+  "caseId": "dsadhaskld",
+  "type": "RESTORE_CASE"
+}
+`;
+
+exports[`test setFieldError action creator 1`] = `
+Object {
+  "caseId": "dsadhaskld",
+  "error": "%error-emptyField",
+  "fieldName": "petitioner.name.first",
+  "type": "SET_FIELD_ERROR"
+}
+`;
+
+exports[`test setPayment action creator 1`] = `
+Object {
+  "caseId": "dsadhaskld",
+  "newPaymentStatuse": "test-payment-status",
+  "type": "SET_PAYMENT"
+}
+`;
+
+exports[`test setStage action creator 1`] = `
+Object {
+  "caseId": "dsadhaskld",
+  "newStage": "test-stage",
+  "type": "SET_STAGE"
+}
+`;

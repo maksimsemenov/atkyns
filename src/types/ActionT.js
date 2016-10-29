@@ -5,5 +5,6 @@ export type ActionT = {
   type: string,
   caseId?: string,
   fieldName?: string,
-  dataPatch?: DataFieldPatchT
+  value?: DataFieldPatchT,
+  error?: string
 }

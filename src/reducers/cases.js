@@ -1,5 +1,6 @@
 /* @flow */
 import type { ActionT } from 'types/ActionT'
+import type { DataFieldPatchT, DataFieldEffectT } from 'types/DataFieldT'
 
 import { fromJS } from 'immutable'
 import capitalize from 'lodash/capitalize'
@@ -7,7 +8,35 @@ import trim from 'lodash/trim'
 import l from 'utils/local'
 import caseReducer, * as fromCase from './case'
 import * as DFN from 'constants/dataFieldNames'
-import { CHANGE_FIELD, ADD_CASE, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'constants/actionTypes'
+
+/*
+ * Action types
+ */
+export const CHANGE_FIELD = 'CHANGE_FIELD'
+export const SET_FIELD_ERROR = 'SET_FIELD_ERROR'
+export const REMOVE_FIELD_ERROR = 'REMOVE_FIELD_ERROR'
+
+export const ADD_CASE = 'ADD_CASE'
+export const DELETE_CASE = 'DELETE_CASE'
+export const RESTORE_CASE = 'RESTORE_CASE'
+
+export const SET_STAGE = 'SET_STAGE'
+export const SET_PAYMENT = 'SET_PAYMENT'
+
+export const actionTypes = {
+  CHANGE_FIELD,
+  SET_FIELD_ERROR,
+  REMOVE_FIELD_ERROR,
+  ADD_CASE,
+  DELETE_CASE,
+  RESTORE_CASE,
+  SET_STAGE,
+  SET_PAYMENT
+}
+
+/*
+ * Reducer
+ */
 
 const cases = (state: Map<string, any> = fromJS({}), action: ActionT) => {
   switch (action.type) {
@@ -39,13 +68,25 @@ export const getCasesNumber = (state: Map<string, any> = fromJS({})) => state.si
 export const getActiveCasesNumber = (state: Map<string, any> = fromJS({})) => state.filter(c => !c.get('deleted')).size
 export const getDeletedCasesNumber = (state: Map<string, any> = fromJS({})) => state.filter(c => c.get('deleted')).size
 export const getCaseStage = (state: Map<string, any> = fromJS({}), caseId: string) => fromCase.getStage(state.get(caseId))
-export const getCaseProgress = (state: Map<string, any> = fromJS({}), caseId: string) => fromCase.getProgress(state.get(caseId))
 export const getCasePaymentStatuse = (state: Map<string, any> = fromJS({}), caseId: string) => fromCase.getPaymentStatuse(state.get(caseId))
 export const getCaseData = (state: Map<string, any> = fromJS({}), caseId: string) => fromCase.getData(state.get(caseId))
-export const getCaseDataField =
-  (state: Map<string, any> = fromJS({}), caseId: string, fieldName: string) => fromCase.getDataField(state.get(caseId), fieldName)
-export const getCaseDataFields =
-  (state: Map<string, any> = fromJS({}), caseId: string, fields: string[]) => fromCase.getDataFields(state.get(caseId), fields)
+
+export const getCaseDataField = (
+  state: Map<string, any> = fromJS({}),
+  caseId: string,
+  fieldName: string
+) => fromCase.getDataField(state.get(caseId), fieldName)
+
+export const getCaseDataFields = (
+  state: Map<string, any> = fromJS({}),
+  caseId: string,
+  fields: string[]
+) => fromCase.getDataFields(state.get(caseId), fields)
+
+export const getCaseDataFieldError = (
+  state: Map<string, any> = fromJS({}),
+  caseId: string, fieldName: string
+) => fromCase.getDataFieldError(state.get(caseId), fieldName)
 
 const caseFields = [
   DFN.P_FIRST_NAME,
@@ -73,4 +114,45 @@ export const getCasesList = (state: Map<string, any> = fromJS({}), deleted: bool
     return getDeletedCaseIdsList(state).map(caseTranformHelper(state))
   }
   return getActiveCaseIdsList(state).map(caseTranformHelper(state))
+}
+
+/*
+ * Actions
+ */
+
+const setDataField = (caseId: string, fieldName: string, value: DataFieldPatchT) =>
+  ({ type: CHANGE_FIELD, caseId, fieldName, value })
+
+const changeDataField = (
+  caseId: string,
+  fieldName: string,
+  value: DataFieldPatchT,
+  effects?: DataFieldEffectT[]) => (dispatch: any) => {
+  dispatch(setDataField(caseId, fieldName, value))
+  if (effects) {
+    effects.forEach((ef) => dispatch(setDataField(caseId, ef.fieldName, ef.effect(value))))
+  }
+}
+
+const setFieldError = (caseId: string, fieldName: string, error: string) =>
+  ({ type: SET_FIELD_ERROR, caseId, fieldName, error })
+
+const removeFieldError = (caseId: string, fieldName: string) =>
+ ({ type: REMOVE_FIELD_ERROR, caseId, fieldName })
+const addCase = (caseId: string) => ({ type: ADD_CASE, caseId })
+const deleteCase = (caseId: string) => ({ type: DELETE_CASE, caseId })
+const restoreCase = (caseId: string) => ({ type: RESTORE_CASE, caseId })
+
+const setStage = (caseId: string, newStage: string) => ({ type: SET_STAGE, caseId, newStage })
+const setPayment = (caseId: string, newPaymentStatuse: string) => ({ type: SET_PAYMENT, caseId, newPaymentStatuse })
+
+export const actions = {
+  changeDataField,
+  setFieldError,
+  removeFieldError,
+  addCase,
+  deleteCase,
+  restoreCase,
+  setStage,
+  setPayment
 }

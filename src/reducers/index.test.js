@@ -17,35 +17,6 @@ it('getCaseStage', () => {
   }})
   expect(fromReducer.getCaseStage(state, 'dfdafad')).toBe(3)
 })
-it('getCaseProgress', () => {
-  const state = fromJS({
-    cases: {
-    dfdafad: {
-      data: {
-        firstName: {
-          value: 'Andy'
-        },
-        familyName: {
-          value: ''
-        },
-        middleName: {
-          disable: true
-        }
-      }
-    },
-    fdffewc: {
-      data: {
-        firstName: {
-          value: 'Andy'
-        },
-        familyName: {
-          value: 'Smith'
-        },
-      }
-    }
-  }})
-  expect(fromReducer.getCaseProgress(state, 'dfdafad')).toBe(50)
-})
 it('getCasePaymentStatuse', () => {
   const state = fromJS({
     cases: {
@@ -130,8 +101,8 @@ it('getCaseDataField', () => {
       }
     }
   })
-  expect(fromReducer.getCaseDataField(state, 'dfdafad', 'petitioner/name/first')).toEqual('Andy')
-  expect(fromReducer.getCaseDataField(state, 'fdffewc', 'relative/name/family')).toEqual('Gilbert')
+  expect(fromReducer.getCaseDataField(state, 'dfdafad', 'petitioner.name.first')).toEqual('Andy')
+  expect(fromReducer.getCaseDataField(state, 'fdffewc', 'relative.name.family')).toEqual('Gilbert')
 })
 it('getCaseDataFields', () => {
   const state = fromJS({
@@ -172,10 +143,10 @@ it('getCaseDataFields', () => {
       }
     }
   })
-  const fields = ['petitioner/name/first', 'relative/name/family']
+  const fields = ['petitioner.name.first', 'relative.name.family']
   const data = {
-    'petitioner/name/first': 'Andy',
-    'relative/name/family': 'Gilbert'
+    'petitioner.name.first': 'Andy',
+    'relative.name.family': 'Gilbert'
   }
   expect(fromReducer.getCaseDataFields(state, 'dfdafad', fields)).toEqual(data)
 })
@@ -241,4 +212,24 @@ it('getCasesList', () => {
   ]
   expect(fromReducer.getCasesList(state)).toEqual(activeCasesList)
   expect(fromReducer.getCasesList(state, true)).toEqual(deletedCasesList)
+})
+it ('getDataFieldError selector returns correct value', () => {
+  const state = fromJS({
+    cases: {
+      dasdasfd: {
+        errors: {
+          'petitioner.name.first': '%error-emptyField'
+        }
+      },
+      dsadados: {
+        errors: {
+          'petitioner.name.second': undefined
+        }
+      }
+    }
+  })
+  expect(fromReducer.getCaseDataFieldError(state, 'dasdasfd', 'petitioner.name.first'))
+    .toEqual('%error-emptyField')
+  expect(fromReducer.getCaseDataFieldError(state, 'dsadados', 'petitioner.name.second'))
+    .toBeUndefined()
 })

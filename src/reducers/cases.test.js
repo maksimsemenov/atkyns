@@ -3,7 +3,7 @@ import values from 'lodash/values'
 import casesReducer, * as fromCases from 'reducers/cases'
 import { initialData} from 'reducers/case'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
-import { ADD_CASE, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'constants/actionTypes'
+import { ADD_CASE, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'reducers/cases'
 import { STAGE_OVERVIEW, STAGE_PETITIONER } from 'constants/stages'
 import * as DFN from 'constants/dataFieldNames'
 
@@ -168,34 +168,6 @@ it('getCaseStage', () => {
   })
   expect(fromCases.getCaseStage(state, 'dfdafad')).toBe(STAGE_OVERVIEW)
 })
-it('getCaseProgress', () => {
-  const state = fromJS({
-    dfdafad: {
-      data: {
-        firstName: {
-          value: 'Andy'
-        },
-        familyName: {
-          value: ''
-        },
-        middleName: {
-          disable: true
-        }
-      }
-    },
-    fdffewc: {
-      data: {
-        firstName: {
-          value: 'Andy'
-        },
-        familyName: {
-          value: 'Smith'
-        },
-      }
-    }
-  })
-  expect(fromCases.getCaseProgress(state, 'dfdafad')).toBe(50)
-})
 it('getCasePaymentStatuse', () => {
   const state = fromJS({
     dfdafad: { payment: PAYMENT_NONE },
@@ -276,8 +248,8 @@ it('getCaseDataField', () => {
       }
     }
   })
-  expect(fromCases.getCaseDataField(state, 'dfdafad', 'petitioner/name/first')).toEqual('Andy')
-  expect(fromCases.getCaseDataField(state, 'fdffewc', 'relative/name/family')).toEqual('Gilbert')
+  expect(fromCases.getCaseDataField(state, 'dfdafad', 'petitioner.name.first')).toEqual('Andy')
+  expect(fromCases.getCaseDataField(state, 'fdffewc', 'relative.name.family')).toEqual('Gilbert')
 })
 it('getCaseDataFields', () => {
   const state = fromJS({
@@ -316,10 +288,10 @@ it('getCaseDataFields', () => {
       }
     }
   })
-  const fields = ['petitioner/name/first', 'relative/name/family']
+  const fields = ['petitioner.name.first', 'relative.name.family']
   const data = {
-    'petitioner/name/first': 'Andy',
-    'relative/name/family': 'Gilbert'
+    'petitioner.name.first': 'Andy',
+    'relative.name.family': 'Gilbert'
   }
   expect(fromCases.getCaseDataFields(state, 'dfdafad', fields)).toEqual(data)
 })
@@ -383,4 +355,74 @@ it('getCasesList', () => {
   ]
   expect(fromCases.getCasesList(state)).toEqual(activeCasesList)
   expect(fromCases.getCasesList(state, true)).toEqual(deletedCasesList)
+})
+it ('getDataFieldError selector returns correct value', () => {
+  const state = fromJS({
+    dasdasfd: {
+      errors: {
+        'petitioner.name.first': '%error-emptyField'
+      }
+    },
+    dsadados: {
+      errors: {
+        'petitioner.name.second': undefined
+      }
+    }
+  })
+  expect(fromCases.getCaseDataFieldError(state, 'dasdasfd', 'petitioner.name.first'))
+    .toEqual('%error-emptyField')
+  expect(fromCases.getCaseDataFieldError(state, 'dsadados', 'petitioner.name.second'))
+    .toBeUndefined()
+})
+
+/*
+ * Action creators
+ */
+
+it('emits events for action effects', () => {
+ let register = {}
+ const dispatch = (action) => {
+   if (typeof action === 'function') {
+     action(dispatch)
+   } else {
+     register.caseId = action.caseId
+     register[action.fieldName] = action.value
+   }
+ }
+ const effects = [{
+   fieldName: 'secondName',
+   effect: () => 'Smith'
+ }]
+ const nextRegister = {
+   caseId: '0f',
+   firstName: 'Andy',
+   secondName: 'Smith',
+ }
+ dispatch(fromCases.actions.changeDataField('0f', 'firstName', 'Andy', effects))
+ expect(register).toEqual(nextRegister)
+})
+
+it('setFieldError action creator', () => {
+  expect(fromCases.actions.setFieldError('dsadhaskld', 'petitioner.name.first', '%error-emptyField')).toMatchSnapshot()
+})
+it('removeFieldError action creator', () => {
+  expect(fromCases.actions.removeFieldError('dsadhaskld', 'petitioner.name.first')).toMatchSnapshot()
+})
+it('addCase action creator', () => {
+  expect(fromCases.actions.addCase('dsadhaskld')).toMatchSnapshot()
+})
+it('deleteCase action creator', () => {
+  expect(fromCases.actions.deleteCase('dsadhaskld')).toMatchSnapshot()
+})
+it('restoreCase action creator', () => {
+  expect(fromCases.actions.restoreCase('dsadhaskld')).toMatchSnapshot()
+})
+it('restoreCase action creator', () => {
+  expect(fromCases.actions.restoreCase('dsadhaskld')).toMatchSnapshot()
+})
+it('setStage action creator', () => {
+  expect(fromCases.actions.setStage('dsadhaskld', 'test-stage')).toMatchSnapshot()
+})
+it('setPayment action creator', () => {
+  expect(fromCases.actions.setPayment('dsadhaskld', 'test-payment-status')).toMatchSnapshot()
 })

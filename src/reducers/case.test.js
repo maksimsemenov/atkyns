@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable'
 import caseReducer, * as fromCase from 'reducers/case'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
-import { CHANGE_FIELD, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'constants/actionTypes'
+import { actionTypes } from 'reducers/cases'
 import { STAGE_OVERVIEW } from 'constants/stages'
 
 describe('Case reducer', () => {
@@ -16,9 +16,9 @@ describe('Case reducer', () => {
       }
     })
     const action1 = {
-      type: CHANGE_FIELD,
-      fieldName: 'petitioner/name/first',
-      dataPatch: 'Andy'
+      type: actionTypes.CHANGE_FIELD,
+      fieldName: 'petitioner.name.first',
+      value: 'Andy'
     }
     const nextState1 = fromJS({
       data: {
@@ -34,23 +34,42 @@ describe('Case reducer', () => {
   })
   it('handles SET_STAGE action', () => {
     const state = fromJS({ stage: STAGE_OVERVIEW })
-    const action = { type: SET_STAGE, newStage: 1 }
+    const action = { type: actionTypes.SET_STAGE, newStage: 1 }
     expect(caseReducer(state, action)).toEqual(fromJS({ stage: 1 }))
   })
   it('handles SET_PAYMENT action', () => {
     const state = fromJS({ payment: PAYMENT_NONE })
-    const action = { type: SET_PAYMENT, newPaymentStatuse: PAYMENT_FULL }
+    const action = { type: actionTypes.SET_PAYMENT, newPaymentStatuse: PAYMENT_FULL }
     expect(caseReducer(state, action)).toEqual(fromJS({ payment: PAYMENT_FULL }))
   })
   it('handle DELETE_CASE action', () => {
     const state = fromJS({ deleted: false })
-    const action = { type: DELETE_CASE }
+    const action = { type: actionTypes.DELETE_CASE }
     expect(caseReducer(state, action)).toEqual(fromJS({ deleted: true }))
   })
   it('handle RESTORE_CASE action', () => {
     const state = fromJS({ deleted: true })
-    const action = { type: RESTORE_CASE }
+    const action = { type: actionTypes.RESTORE_CASE }
     expect(caseReducer(state, action)).toEqual(fromJS({ deleted: false }))
+  })
+  it('handle SET_FIELD_ERROR action', () => {
+    const state = fromJS({})
+    const action = {
+      type: actionTypes.SET_FIELD_ERROR,
+      fieldName: 'petitioner',
+      error: '%error-emptyField'
+    }
+    expect(caseReducer(state, action))
+      .toEqual(fromJS({ errors: { petitioner: '%error-emptyField' } }))
+  })
+  it('handle SET_FIELD_ERROR action', () => {
+    const state = fromJS({ errors: { petitioner: '%error-emptyField' } })
+    const action = {
+      type: actionTypes.SET_FIELD_ERROR,
+      fieldName: 'petitioner'
+    }
+    expect(caseReducer(state, action))
+      .toEqual(fromJS({ errors: { petitioner: undefined } }))
   })
 })
 describe('Case initialState function', () => {
@@ -86,26 +105,6 @@ it ('getStage selector returns correct value', () => {
     stage: STAGE_OVERVIEW
   })
   expect(fromCase.getStage(state)).toBe(STAGE_OVERVIEW)
-})
-it ('getProgress selector returns correct value', () => {
-  const state = fromJS({
-    data: {
-      firstName: {
-        value: 'Andy'
-      },
-      familyName: {
-        value: ''
-      },
-      middleName: {
-        disable: true
-      }
-    }
-  })
-  const state2 = fromJS({
-    stage: STAGE_OVERVIEW
-  })
-  expect(fromCase.getProgress(state)).toBe(50)
-  expect(fromCase.getProgress(state2)).toBe(0)
 })
 it ('getPaymentStatuse selector returns correct value', () => {
   const state = fromJS({
@@ -152,7 +151,7 @@ it ('getDataField selector returns correct value', () => {
       }
     }
   })
-  expect(fromCase.getDataField(state, 'petitioner/name/first')).toBe('Andy')
+  expect(fromCase.getDataField(state, 'petitioner.name.first')).toBe('Andy')
 })
 it ('getDataFields selector returns correct value', () => {
   const state = fromJS({
@@ -167,14 +166,21 @@ it ('getDataFields selector returns correct value', () => {
     }
   })
   const fields = [
-    'petitioner/name/first',
-    'petitioner/name/family',
-    'petitioner/name/middle'
+    'petitioner.name.first',
+    'petitioner.name.family',
+    'petitioner.name.middle'
   ]
   const data = {
-    'petitioner/name/first': 'Andy',
-    'petitioner/name/family': '',
-    'petitioner/name/middle': 'Larry'
+    'petitioner.name.first': 'Andy',
+    'petitioner.name.family': '',
+    'petitioner.name.middle': 'Larry'
   }
   expect(fromCase.getDataFields(state, fields)).toEqual(data)
+})
+it ('getDataFieldError selector returns correct value', () => {
+  const state = fromJS({ errors: { 'petitioner.name.first': '%error-emptyField' }})
+  expect(fromCase.getDataFieldError(state, 'petitioner.name.first'))
+    .toEqual('%error-emptyField')
+  expect(fromCase.getDataFieldError(state, 'petitioner.name.second'))
+    .toBeUndefined()
 })

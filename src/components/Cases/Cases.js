@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import Case from 'components/Case/Case'
 import NewCase from 'components/NewCase/NewCase'
 import EmptyCases from 'components/EmptyCases/EmptyCases'
-import { getCasesList } from 'reducers'
-import { addCase, deleteCase } from 'actions'
+import { getCasesList, actions } from 'reducers'
 
 import './Cases.less'
 
@@ -40,10 +39,9 @@ const mapStateToProps = (state, ownProps) => ({
   cases: getCasesList(state)
 })
 const mapDispatchToProps = (dispatch) => ({
-  onAddCase: (newId) => dispatch(addCase(newId)),
+  onAddCase: (newId) => dispatch(actions.addCase(newId)),
   onCaseDelete: (caseId) => {
-    console.log('Delete case', caseId)
-    dispatch(deleteCase(caseId))
+    dispatch(actions.deleteCase(caseId))
   }
 })
 
