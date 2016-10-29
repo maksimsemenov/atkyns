@@ -1,18 +1,22 @@
 @import '~constants/styles.less';
 
+.textfield__control {
+  width: 350px;
+  max-width: 100%;
+}
 .textfield {
   width: 100%;
   box-sizing: border-box;
   padding: 10px 10px 12px;
   border-radius: 2px;
-  border: 1px solid @color-grey;
+  border: 1px solid @color-gray;
   font-size: @font-size-form;
   font-weight: @font-weight-basic;
 
   transition: border-color @transition-basic;
 
   &:hover {
-    border-color: @color-dark-grey;
+    border-color: @color-dark-gray;
     transition: border-color @transition-active;
   }
   &:active,
@@ -24,7 +28,25 @@
   }
 
   &::placeholder {
-    color: @color-grey;
+    color: @color-gray;
     font-weight: @font-weight-basic;
   }
+
+  &.has-error {
+    border-color: @color-red;
+    box-shadow: 0 0 3px 0 fade(@color-red, 30%);
+  }
+}
+
+.textfield-error {
+  padding: 2px;
+  line-height: 1.4;
+  color: @color-red;
+  font-size: @font-size-small;
+}
+.textfield-note {
+  padding: 2px;
+  line-height: 1.4;
+  color: @font-color-light;
+  font-size: @font-size-small;
 }

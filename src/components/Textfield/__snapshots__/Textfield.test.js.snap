@@ -20,7 +20,7 @@ exports[`Textfield component Snapshot test 2`] = `
     type="text"
     value={undefined} />
   <div
-    className="ob-textfield-note">
+    className="textfield-note">
     Note for the field
   </div>
 </div>
@@ -36,7 +36,7 @@ exports[`Textfield component Snapshot test 3`] = `
     type="text"
     value={undefined} />
   <div
-    className="ob-textfield-error">
+    className="textfield-error">
     Error in field
   </div>
 </div>

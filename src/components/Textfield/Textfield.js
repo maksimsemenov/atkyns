@@ -57,8 +57,8 @@ const Textfield = ({
       ) : (
         <input value={maskedValue} onChange={onChange} {...inputProps} />
       )}
-      {error && <div className='ob-textfield-error'>{error}</div>}
-      {!error && note && <div className='ob-textfield-note'>{note}</div>}
+      {error && <div className='textfield-error'>{error}</div>}
+      {!error && note && <div className='textfield-note'>{note}</div>}
     </div>
   )
 }
