@@ -1,0 +1,93 @@
+exports[`Textfield component Snapshot test 1`] = `
+<div
+  className="textfield__control"
+  style={undefined}>
+  <input
+    className="textfield"
+    onChange={[Function onChange]}
+    type="text"
+    value={undefined} />
+</div>
+`;
+
+exports[`Textfield component Snapshot test 2`] = `
+<div
+  className="textfield__control"
+  style={undefined}>
+  <input
+    className="textfield"
+    onChange={[Function onChange]}
+    type="text"
+    value={undefined} />
+  <div
+    className="ob-textfield-note">
+    Note for the field
+  </div>
+</div>
+`;
+
+exports[`Textfield component Snapshot test 3`] = `
+<div
+  className="textfield__control"
+  style={undefined}>
+  <input
+    className="textfield has-error"
+    onChange={[Function onChange]}
+    type="text"
+    value={undefined} />
+  <div
+    className="ob-textfield-error">
+    Error in field
+  </div>
+</div>
+`;
+
+exports[`Textfield component Snapshot test 4`] = `
+<div
+  className="textfield__control"
+  style={undefined}>
+  <div
+    style={
+      Object {
+        "display": "inline-block"
+      }
+    }>
+    <input
+      aria-autocomplete="list"
+      autoComplete="off"
+      className="textfield"
+      onBlur={[Function bound handleInputBlur]}
+      onChange={[Function anonymous]}
+      onClick={[Function bound handleInputClick]}
+      onFocus={[Function bound handleInputFocus]}
+      onKeyDown={[Function anonymous]}
+      onKeyUp={[Function anonymous]}
+      role="combobox"
+      type="text"
+      value="Test value" />
+  </div>
+</div>
+`;
+
+exports[`renderItem function Snapshot test 1`] = `
+<li
+  className="textfield-acItem">
+  item2
+</li>
+`;
+
+exports[`renderItem function Snapshot test 2`] = `
+<li
+  className="textfield-acItemis-highlighted">
+  item2
+</li>
+`;
+
+exports[`renderMenu function Snapshot test 1`] = `
+<ul
+  className="textfield-ac"
+  style={undefined}>
+  item1
+  item2
+</ul>
+`;

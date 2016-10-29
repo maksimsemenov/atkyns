@@ -1,0 +1,30 @@
+@import '~constants/styles.less';
+
+.textfield {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 10px 12px;
+  border-radius: 2px;
+  border: 1px solid @color-grey;
+  font-size: @font-size-form;
+  font-weight: @font-weight-basic;
+
+  transition: border-color @transition-basic;
+
+  &:hover {
+    border-color: @color-dark-grey;
+    transition: border-color @transition-active;
+  }
+  &:active,
+  &:focus {
+    border-color: @color-accent;
+    outline: none;
+    box-shadow: 0 0 3px 0 fade(@color-accent, 30%);
+    transition: border-color @transition-active;
+  }
+
+  &::placeholder {
+    color: @color-grey;
+    font-weight: @font-weight-basic;
+  }
+}
