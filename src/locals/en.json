@@ -22,8 +22,10 @@
   "%stage-relative": "Relative",
   "%stage-petitioner": "Petitioner",
   "%stage-petition": "Petition",
-  
+
   "%sOverview-iam": "I am a",
   "%sOverview-iapply": " and I apply for my",
-  "%sOverview-wholives": "who lives"
+  "%sOverview-wholives": "who lives",
+
+  "%-error-emptyField": "Couldn't be empty"
 }

@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import Case from 'components/Case/Case'
 import NewCase from 'components/NewCase/NewCase'
 import EmptyCases from 'components/EmptyCases/EmptyCases'
-import { getCasesList, actions } from 'reducers'
+import { getCasesList } from 'reducers'
+import { actions } from 'reducers/cases'
 
 import './Cases.less'
 
