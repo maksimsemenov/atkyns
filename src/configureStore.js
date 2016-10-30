@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { fromJS } from 'immutable'
 import throttle from 'lodash/throttle'
 import createLogger from 'redux-logger'
@@ -15,12 +15,21 @@ if (process.env.NODE_ENV === 'development') {
   middleware.push(logger)
 }
 
+const composeEnhancers =
+  process.env.NODE_ENV !== 'production' &&
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) :
+    compose
+
+const enhancer = composeEnhancers(applyMiddleware(...middleware))
+
 const configureStore = () => {
   const persistedState = fromJS({ cases: loadState() })
   const store = createStore(
     reducer,
     persistedState,
-    applyMiddleware(...middleware)
+    enhancer
   )
 
   store.subscribe(throttle(() => {
