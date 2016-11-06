@@ -51,99 +51,101 @@
   font-size: @font-size-small;
 }
 
-.textfield__calendar {
-  width: 100%;
-  max-width: 300px;
-  padding: 20px 25px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
 
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 1px 3px 0 fade(#000, 20%);
-}
-.textfield__calendarHeader {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.textfield__calendarMonthTitle {
-  padding: 5px;
-  margin: 0 5px;
-  cursor: pointer;
-}
-.textfield__calendarYearTitle {
-  padding: 5px;
-  margin: 0 5px;
-  cursor: pointer;
-}
-
-.textfield__calendarWeek {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-
-.textfield__calendarWeekDay {
-  position: relative;
-  box-sizing: border-box;
-  width: 14.2857%;
-  padding: 5px;
-  margin-bottom: 5px;
-
-  text-align: center;
-  font-size: @font-size-xsmall;
-  font-weight: @font-weight-basic;
-  color: @font-color-light;
-  letter-spacing: 0.04em;
-}
-
-.textfield__calendarDay {
-  position: relative;
-  width: 14.2857%;
-  height: 34px;
-  text-align: center;
-  padding: 5px auto;
-  cursor: pointer;
-  margin: 2px 0;
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    width: 34px;
-    height: 34px;
-    transform: translate(-50%, -50%) scale(0);
-    border-radius: 50%;
-    opacity: 0;
-    background-color: @color-light-blue;
-    transition: transform @transition-basic, opacity @transition-basic;
-  }
-
-  &:hover::before {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    transition: transform @transition-active, opacity @transition-active;
-  }
-
-  &.is-empty {
-    pointer-events: none;
-
-    &::before {
-      content: none;
-    }
-  }
-}
-.textfield__calendarDayText {
-  position: relative;
-  z-index: 1;
-}
+//
+// .textfield__calendar {
+//   width: 100%;
+//   max-width: 300px;
+//   padding: 20px 25px;
+//   box-sizing: border-box;
+//   display: flex;
+//   flex-direction: column;
+//
+//   background-color: #fff;
+//   border-radius: 2px;
+//   box-shadow: 0 1px 3px 0 fade(#000, 20%);
+// }
+// .textfield__calendarHeader {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: nowrap;
+//   align-items: center;
+//   margin-bottom: 10px;
+// }
+//
+// .textfield__calendarMonthTitle {
+//   padding: 5px;
+//   margin: 0 5px;
+//   cursor: pointer;
+// }
+// .textfield__calendarYearTitle {
+//   padding: 5px;
+//   margin: 0 5px;
+//   cursor: pointer;
+// }
+//
+// .textfield__calendarWeek {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: nowrap;
+// }
+//
+// .textfield__calendarWeekDay {
+//   position: relative;
+//   box-sizing: border-box;
+//   width: 14.2857%;
+//   padding: 5px;
+//   margin-bottom: 5px;
+//
+//   text-align: center;
+//   font-size: @font-size-xsmall;
+//   font-weight: @font-weight-basic;
+//   color: @font-color-light;
+//   letter-spacing: 0.04em;
+// }
+//
+// .textfield__calendarDay {
+//   position: relative;
+//   width: 14.2857%;
+//   height: 34px;
+//   text-align: center;
+//   padding: 5px auto;
+//   cursor: pointer;
+//   margin: 2px 0;
+//
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     z-index: 0;
+//     top: 50%;
+//     left: 50%;
+//     width: 34px;
+//     height: 34px;
+//     transform: translate(-50%, -50%) scale(0);
+//     border-radius: 50%;
+//     opacity: 0;
+//     background-color: @color-light-blue;
+//     transition: transform @transition-basic, opacity @transition-basic;
+//   }
+//
+//   &:hover::before {
+//     opacity: 1;
+//     transform: translate(-50%, -50%) scale(1);
+//     transition: transform @transition-active, opacity @transition-active;
+//   }
+//
+//   &.is-empty {
+//     pointer-events: none;
+//
+//     &::before {
+//       content: none;
+//     }
+//   }
+// }
+// .textfield__calendarDayText {
+//   position: relative;
+//   z-index: 1;
+// }
 
 
 // .calendar__prev,

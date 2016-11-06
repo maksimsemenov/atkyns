@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import Autocomplete from 'react-autocomplete'
-import Datefield from './Datefield'
 import l from 'utils/local'
 import './Textfield.less'
 
@@ -27,12 +26,6 @@ const defaultAC = {
   getItemValue,
   shouldItemRender
 }
-
-
-
-/*
- * Textfield component itself
- */
 
 const Textfield = ({
   value,
