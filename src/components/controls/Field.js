@@ -11,7 +11,6 @@ const Field = ({
   effects,
   validators,
   ...rest }) => {
-    console.log(...rest)
     return (
   component({...rest}))}
 
