@@ -1,0 +1,56 @@
+@import '~constants/styles.less';
+
+.selectbox__control {
+  width: 350px;
+  max-width: 100%;
+}
+.selectbox {
+  appearance: none;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 10px 12px;
+  border-radius: 2px;
+
+  background-color: #fafafa;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="10px" viewBox="0 0 16 10" fill="none"><polyline stroke="@{font-color-light}" stroke-width="1" points="1,1 8,9 15,1"/></svg>');
+  background-repeat: no-repeat;
+  background-position: ~"calc(100% - 12px)" center;
+  color: @font-color-light;
+  border: 1px solid @color-gray;
+  font-size: @font-size-form;
+  font-weight: @font-weight-basic;
+
+  transition: border-color @transition-basic;
+
+  &:hover {
+    border-color: @color-dark-gray;
+    transition: border-color @transition-active;
+  }
+  &:active,
+  &:focus {
+    border-color: @color-accent;
+    outline: none;
+    box-shadow: 0 0 3px 0 fade(@color-accent, 30%);
+    transition: border-color @transition-active;
+  }
+  &.has-value {
+    color: @font-color-basic;
+  }
+  &.has-error {
+    border-color: @color-red;
+    box-shadow: 0 0 3px 0 fade(@color-red, 30%);
+  }
+}
+
+.selectbox__error {
+  padding: 2px;
+  line-height: 1.4;
+  color: @color-red;
+  font-size: @font-size-small;
+}
+.selectbox__note {
+  padding: 2px;
+  line-height: 1.4;
+  color: @font-color-light;
+  font-size: @font-size-small;
+}

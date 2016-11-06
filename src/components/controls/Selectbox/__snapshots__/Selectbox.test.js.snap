@@ -1,0 +1,25 @@
+exports[`Selectbox component Snapshot test 1`] = `
+<div
+  className="selectbox__control">
+  <select
+    className="selectbox has-value"
+    onChange={[Function onChange]}
+    value="option1">
+    <option
+      disabled={undefined}
+      value="option1">
+      %Option 1
+    </option>
+    <option
+      disabled={undefined}
+      value="option2">
+      %Option 2
+    </option>
+    <option
+      disabled={undefined}
+      value="option3">
+      %Option 3
+    </option>
+  </select>
+</div>
+`;
