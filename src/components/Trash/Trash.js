@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Link from 'react-router/Link'
 import { getCasesList } from 'reducers'
-import { restoreCase } from 'actions'
+import { actions } from 'reducers/cases'
 import l from 'utils/local'
 import './Trash.less'
 
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => ({
   cases: getCasesList(state, true)
 })
 const mapDispatchToProps = (dispatch) => ({
-  onCaseRestore: (caseId) => dispatch(restoreCase(caseId))
+  onCaseRestore: (caseId) => dispatch(actions.restoreCase(caseId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trash)
