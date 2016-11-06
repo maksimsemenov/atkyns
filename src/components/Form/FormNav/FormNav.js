@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import Link from 'react-router/Link'
-import FormNavItem from 'components/FormNavItem/FormNavItem'
+import FormNavItem from 'components/Form/FormNavItem/FormNavItem'
+import { STAGE_OVERVIEW, STAGE_PETITIONER, STAGE_RELATIVE, STAGE_PETITION } from 'constants/stages'
 import './FormNav.less'
 
 const FormCloseBtn = () =>
@@ -14,19 +15,20 @@ const FormCloseBtn = () =>
   </Link>
 
 
-const FormNav = ({ stages, caseId, caseName }) => {
+const FormNav = ({ stages, caseId, stage, caseName }) => {
   return (
     <div className='formNav'>
       <div className='formNav__header'>
       </div>
       <FormCloseBtn />
       <ul className='formNav__list'>
-        {stages.map((stage, i) =>
+        {stages.map((s, i) =>
           <FormNavItem
             key={i}
-            stage={stage.name}
+            stage={s.name}
             caseId={caseId}
             progress={stage.progress}
+            active={s.name === stage}
           />
         )}
       </ul>
@@ -39,6 +41,7 @@ FormNav.propTypes = {
     progress: PropTypes.number
   })).isRequired,
   caseId: PropTypes.string.isRequired,
+  stage: PropTypes.oneOf([STAGE_OVERVIEW, STAGE_PETITIONER, STAGE_RELATIVE, STAGE_PETITION]).isRequired,
   caseName: PropTypes.string
 }
 

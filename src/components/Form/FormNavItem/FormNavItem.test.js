@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router'
-import FormNavItem from 'components/FormNavItem/FormNavItem'
+import FormNavItem from './FormNavItem'
 import { STAGE_OVERVIEW } from 'constants/stages'
 
 describe('FormNavItem component', () => {

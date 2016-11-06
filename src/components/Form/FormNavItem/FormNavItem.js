@@ -4,7 +4,8 @@ import { STAGE_OVERVIEW, STAGE_RELATIVE, STAGE_PETITIONER, STAGE_PETITION } from
 import l from 'utils/local'
 import './FormNavItem.less'
 
-const FormNavItem = ({ stage, caseId, progress = 0 }) =>
+
+const FormNavItem = ({ stage, caseId, progress = 0, active = false }) =>
   <li className='formNavItem'>
     <Link
       to={`/case/${caseId}/${stage}`}
@@ -18,7 +19,8 @@ const FormNavItem = ({ stage, caseId, progress = 0 }) =>
 FormNavItem.propTypes = {
   stage: PropTypes.oneOf([STAGE_OVERVIEW, STAGE_RELATIVE, STAGE_PETITIONER, STAGE_PETITION]).isRequired,
   caseId: PropTypes.string.isRequired,
-  progress: PropTypes.number
+  progress: PropTypes.number,
+  active: PropTypes.bool
 }
 
 export default FormNavItem
