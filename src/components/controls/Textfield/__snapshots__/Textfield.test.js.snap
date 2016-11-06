@@ -4,7 +4,9 @@ exports[`Textfield component Snapshot test 1`] = `
   style={undefined}>
   <input
     className="textfield"
+    onBlur={[Function onBlur]}
     onChange={[Function onChange]}
+    onFocus={[Function onFocus]}
     type="text"
     value={undefined} />
 </div>
@@ -16,11 +18,13 @@ exports[`Textfield component Snapshot test 2`] = `
   style={undefined}>
   <input
     className="textfield"
+    onBlur={[Function onBlur]}
     onChange={[Function onChange]}
+    onFocus={[Function onFocus]}
     type="text"
     value={undefined} />
   <div
-    className="textfield-note">
+    className="textfield__note">
     Note for the field
   </div>
 </div>
@@ -32,11 +36,13 @@ exports[`Textfield component Snapshot test 3`] = `
   style={undefined}>
   <input
     className="textfield has-error"
+    onBlur={[Function onBlur]}
     onChange={[Function onChange]}
+    onFocus={[Function onFocus]}
     type="text"
     value={undefined} />
   <div
-    className="textfield-error">
+    className="textfield__error">
     Error in field
   </div>
 </div>
@@ -49,7 +55,7 @@ exports[`Textfield component Snapshot test 4`] = `
   <div
     style={
       Object {
-        "display": "inline-block"
+        "display": "block"
       }
     }>
     <input

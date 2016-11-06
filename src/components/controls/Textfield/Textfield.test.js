@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import Textfield, * as fromTextfield from 'components/Textfield/Textfield'
+import Textfield, * as fromTextfield from './Textfield'
 jest.mock('react-dom')
 
 describe('Textfield component', () => {

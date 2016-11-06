@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Autocomplete from 'react-autocomplete'
+import Datefield from './Datefield'
+import l from 'utils/local'
 import './Textfield.less'
 
 
@@ -26,21 +28,28 @@ const defaultAC = {
   shouldItemRender
 }
 
-// Textfield component itself
+
+
+/*
+ * Textfield component itself
+ */
+
 const Textfield = ({
   value,
-  mask,
+  transformIn = (value) => value,
+  transformOut = (value) => value,
   wrapperStyle,
   appearance,
   autocomplete,
   onChange,
+  onBlur = () => {},
+  onFocus = () => {},
   error,
   note,
   ...rest
 }) => {
-  const maskedValue = mask ? mask(value) : value
-  const ac = autocomplete ? {...defaultAC, ...autocomplete } : undefined
-  const inputProps = {
+  let ac = autocomplete ? {...defaultAC, ...autocomplete } : undefined
+  let inputProps = {
     className: `textfield${error ? ' has-error' : ''}`,
     ...rest
   }
@@ -48,17 +57,24 @@ const Textfield = ({
     <div className='textfield__control' style={wrapperStyle}>
       {ac ? (
         <Autocomplete
-          value={maskedValue}
-          onSelect={onChange}
-          onChange={(event, value) => onChange(value)}
+          value={transformIn(value)}
+          onSelect={(value) => onChange(transformOut(value))}
+          onChange={(event, value) => onChange(transformOut(value))}
           inputProps={inputProps}
+          wrapperStyle={{ display: 'block' }}
           {...ac}
         />
-      ) : (
-        <input value={maskedValue} onChange={onChange} {...inputProps} />
+        ) : (
+        <input
+          value={transformIn(value)}
+          onChange={(e) => onChange(transformOut(e.target.value))}
+          onBlur={(e) => onBlur(transformOut(e.target.value))}
+          onFocus={(e) => onFocus(transformOut(e.target.value))}
+          {...inputProps}
+        />
       )}
-      {error && <div className='textfield-error'>{error}</div>}
-      {!error && note && <div className='textfield-note'>{note}</div>}
+      {error ? <div className='textfield__error'>{l(error)}</div> : null}
+      {!error && note && <div className='textfield__note'>{l(note)}</div>}
     </div>
   )
 }
@@ -74,13 +90,18 @@ Textfield.propTypes = {
     })).isRequired,
     shouldItemRender: PropTypes.func
   }),
-  mask: PropTypes.func,
+  transformIn: PropTypes.func,
+  transformOut: PropTypes.func,
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
 
   appearance: PropTypes.oneOf(['default', 'inGroup']),
 }
 Textfield.defaultProps = {
   type: 'text',
+  onFocus: () => {},
+  onBlur: () => {}
 }
 
 export default Textfield
