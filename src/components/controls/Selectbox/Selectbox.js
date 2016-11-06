@@ -16,7 +16,7 @@ const Selectbox = ({ options, value = '', placeholder, onChange, error, note, ..
           key={index}
           value={option.value}
           disabled={option.disabled}
-        >{l(`%${option.name}`)}</option>
+        >{option.name}</option>
       )}
     </select>
     {error ? <div className='selectbox__error'>{l(error)}</div> : null}
