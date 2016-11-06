@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import Autocomplete from 'react-autocomplete'
+import classNames from 'classnames'
 import l from 'utils/local'
 import './Textfield.less'
 
@@ -32,6 +33,7 @@ const Textfield = ({
   transformIn = (value) => value,
   transformOut = (value) => value,
   wrapperStyle,
+  className,
   appearance,
   autocomplete,
   onChange,
@@ -42,8 +44,13 @@ const Textfield = ({
   ...rest
 }) => {
   let ac = autocomplete ? {...defaultAC, ...autocomplete } : undefined
+  const inputClasses = {
+    'textfield': true,
+    'has-error': error,
+    [className]: className
+  }
   let inputProps = {
-    className: `textfield${error ? ' has-error' : ''}`,
+    className: inputClasses,
     ...rest
   }
   return (
@@ -76,6 +83,7 @@ Textfield.propTypes = {
   value: PropTypes.string,
   type: PropTypes.oneOf(['text', 'email', 'password', 'url', 'date', 'number']),
   wrapperStyle: PropTypes.object,
+  className: PropTypes.string,
   autocomplete: PropTypes.shape({
     items: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string.isRequired,
