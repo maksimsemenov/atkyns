@@ -1,0 +1,97 @@
+@import '~constants/styles.less';
+
+.selector__control {
+  width: 350px;
+  max-width: 100%;
+}
+.selector {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  border-radius: @radius-control;
+  border: 1px solid @color-gray;
+  font-size: @font-size-form;
+  font-weight: @font-weight-basic;
+
+  transition: border-color @transition-basic;
+
+  &:hover {
+    border-color: @color-dark-gray;
+    transition: border-color @transition-active;
+  }
+  &.has-value {
+    border-color: @color-accent;
+    transition: border-color @transition-active;
+
+    &:hover {
+      border-color: @color-accent-active;
+    }
+  }
+  &.has-error {
+    border-color: @color-red;
+    box-shadow: 0 0 3px 0 fade(@color-red, 30%);
+  }
+}
+
+.selector__option {
+  padding: 10px 24px 12px;
+  cursor: pointer;
+
+  color: @font-color-basic;
+  border-right: 1px solid @color-gray;
+  transition: border-color @transition-basic, background-color @transition-basic, color @transition-basic;
+
+  .selector:hover & {
+    border-color: @color-dark-gray;
+  }
+  &:hover {
+    background-color: fade(@color-gray, 40);
+    transition: background-color @transition-active
+  }
+  .selector.has-value & {
+    border-color: @color-accent;
+    color: @color-accent;
+    &.is-active {
+      color: #fff;
+    }
+  }
+  .selector.has-value:hover & {
+    border-color: @color-accent-active;
+    transition: border-color @transition-active
+  }
+  .selector.has-value:hover &:hover {
+    background-color: fade(@color-accent, 7);
+    transition: background-color @transition-active;
+  }
+  &.is-active {
+    pointer-events: none;
+    background-color: @color-accent;
+    border-color: @color-accent;
+    color: #fff;
+    transition: border-color @transition-active, background-color @transition-active, color @transition-active;
+
+    &:hover,
+    .selector.has-value:hover &:hover {
+      background-color: @color-accent;
+    }
+  }
+  .selector.has-error & {
+    border-color: @color-red;
+    color: @color-red;
+    &:hover {
+      border-color: @color-red;
+      background-color: fade(@color-red, 7);
+    }
+  }
+  &:last-child {
+    border-right: none;
+  }
+}

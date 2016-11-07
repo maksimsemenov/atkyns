@@ -1,0 +1,23 @@
+exports[`Selector component renders without craches 1`] = `
+<div
+  className="selector__container">
+  <ul
+    className="selector">
+    <li
+      className="selector__option"
+      onClick={[Function onClick]}>
+      Option 1
+    </li>
+    <li
+      className="selector__option"
+      onClick={[Function onClick]}>
+      Option 2
+    </li>
+    <li
+      className="selector__option"
+      onClick={[Function onClick]}>
+      Option 3
+    </li>
+  </ul>
+</div>
+`;
