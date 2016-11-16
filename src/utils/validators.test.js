@@ -1,24 +1,4 @@
-import { url, phone, required, validateValue } from 'utils/validators'
-
-describe('URL validator', () => {
-  it('Shouldn\'t return an error for correct URLs', () =>{
-    expect(url('http://example.com')).toBeUndefined()
-    expect(url('https://example.com')).toBeUndefined()
-    expect(url('example.com')).toBeUndefined()
-    expect(url('wwww.example.com')).toBeUndefined()
-    expect(url('http://example.com/?utm_source=orchectra')).toBeUndefined()
-    expect(url('')).toBeUndefined()
-  })
-  it('Should return an error for incorrect URLs', () =>{
-    expect(url('htp://example.com')).toEqual('%-error-wrongUrl')
-    expect(url('https:///example.com')).toEqual('%-error-wrongUrl')
-    expect(url('example.c')).toEqual('%-error-wrongUrl')
-    expect(url('htps://.example.com')).toEqual('%-error-wrongUrl')
-    expect(url('ftp://example.com/?utm_source=orchectra')).toEqual('%-error-wrongUrl')
-    expect(url('6')).toEqual('%-error-wrongUrl')
-    expect(url('http://example with space.com')).toEqual('%-error-wrongUrl')
-  })
-})
+import { phone, required, validateValue, date } from 'utils/validators'
 
 describe('Phone validator', () => {
   it('Shouldn\'t return error for correct phone', () => {
@@ -40,6 +20,23 @@ describe('Phone validator', () => {
     expect(phone('ABB-21321-23')).toEqual('%-error-wrongPhone')
     expect(phone('+1 )242)-43234')).toEqual('%-error-wrongPhone')
     expect(phone('-1232-2131-3231')).toEqual('%-error-wrongPhone')
+  })
+})
+
+describe('Date validator', () => {
+  it('Should\'t return error for correct date', () => {
+    expect(date('MM/DD/YYYY')('02/21/2016')).toBeUndefined()
+    expect(date('MM/DD/YYYY')('12/31/2016')).toBeUndefined()
+    expect(date('DD/MM/YYYY')('02/10/2016')).toBeUndefined()
+  })
+  it('Should return error for incorrect date', () => {
+    expect(date('DD/MM/YYYY')('02/21/2016')).toEqual('Wrong date')
+    expect(date('DD/MM/YYYY')('32/10/2016')).toEqual('Wrong date')
+    expect(date('DD/MM/YYYY')('02/21/16')).toEqual('Wrong date')
+    expect(date('MM/DD/YYYY')('00/00/0000')).toEqual('Wrong date')
+    expect(date('DD/MM/YYYY')('11/11/1111')).toEqual('Wrong date')
+    expect(date('DD/MM/YYYY')('23/21/2016')).toEqual('Wrong date')
+    expect(date('DD/MM/YYYY')('32/1/2016')).toEqual('Wrong date')
   })
 })
 

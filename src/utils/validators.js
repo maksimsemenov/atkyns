@@ -1,15 +1,11 @@
+import l from 'utils/local'
+
 const isEmpty = value => value === undefined || value === null || value === ''
 
 export const email = (value) => {
   // Let's not start a debate on email regex. This is just for an example app!
   if (!isEmpty(value) && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
     return '%-error-wrongEmail'
-  }
-}
-
-export const url = (value) => {
-  if (!isEmpty(value) && !/^(https?:\/\/)?([a-z0-9\-_]+\.[a-z]{2,6})[:a-z0-9#\?=_\.\-\/]*/ig.test(value)) {
-    return '%-error-wrongUrl'
   }
 }
 
@@ -25,15 +21,15 @@ export const required = (value) => {
   }
 }
 
-export const minLength = (min) => value => {
-  if (!isEmpty(value) && value.length < min) {
-    return `Must be at least ${min} characters`
-  }
-}
+export const date = format => value => {
+  let reg = new RegExp(format
+    .replace('MM', '(0[1-9]|1[0-2])')
+    .replace('DD', '(0[1-9]|[12][0-9]|3[01])')
+    .replace('YYYY', '(19|20)[0-9]{2}'))
+    console.log(reg, format, value, reg.test(value))
 
-export const maxLength = (max) => value => {
-  if (!isEmpty(value) && value.length > max) {
-    return `Must be no more than ${max} characters`
+  if (!isEmpty(value) && !reg.test(value)) {
+    return l('Wrong date')
   }
 }
 
