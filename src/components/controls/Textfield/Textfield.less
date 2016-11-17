@@ -5,6 +5,8 @@
   max-width: 100%;
 }
 .textfield {
+  position: relative;
+  z-index: 1;
   width: 100%;
   box-sizing: border-box;
   padding: 10px 10px 12px;
@@ -36,6 +38,26 @@
     border-color: @color-red;
     box-shadow: 0 0 3px 0 fade(@color-red, 30%);
   }
+  &.in-row {
+    border-radius: 0;
+
+    &:hover {
+      z-index: 2;
+    }
+    &:active,
+    &:focus {
+      z-index: 3;
+    }
+  }
+  &.first-in-row {
+    border-top-left-radius: @radius-control;
+    border-bottom-left-radius: @radius-control;
+  }
+  &.last-in-row {
+    border-top-right-radius: @radius-control;
+    border-bottom-right-radius: @radius-control;
+  }
+
 }
 
 .textfield__error {

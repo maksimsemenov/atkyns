@@ -3,13 +3,7 @@ exports[`Textfield component Snapshot test 1`] = `
   className="textfield__control"
   style={undefined}>
   <input
-    className={
-      Object {
-        "has-error": undefined,
-        "textfield": true,
-        "undefined": undefined
-      }
-    }
+    className="textfield"
     onBlur={[Function onBlur]}
     onChange={[Function onChange]}
     onFocus={[Function onFocus]}
@@ -23,13 +17,7 @@ exports[`Textfield component Snapshot test 2`] = `
   className="textfield__control"
   style={undefined}>
   <input
-    className={
-      Object {
-        "has-error": undefined,
-        "textfield": true,
-        "undefined": undefined
-      }
-    }
+    className="textfield"
     onBlur={[Function onBlur]}
     onChange={[Function onChange]}
     onFocus={[Function onFocus]}
@@ -47,13 +35,7 @@ exports[`Textfield component Snapshot test 3`] = `
   className="textfield__control"
   style={undefined}>
   <input
-    className={
-      Object {
-        "has-error": "Error in field",
-        "textfield": true,
-        "undefined": undefined
-      }
-    }
+    className="textfield has-error"
     onBlur={[Function onBlur]}
     onChange={[Function onChange]}
     onFocus={[Function onFocus]}
@@ -79,13 +61,7 @@ exports[`Textfield component Snapshot test 4`] = `
     <input
       aria-autocomplete="list"
       autoComplete="off"
-      className={
-        Object {
-          "has-error": undefined,
-          "textfield": true,
-          "undefined": undefined
-        }
-      }
+      className="textfield"
       onBlur={[Function bound handleInputBlur]}
       onChange={[Function anonymous]}
       onClick={[Function bound handleInputClick]}

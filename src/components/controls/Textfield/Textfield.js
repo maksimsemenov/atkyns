@@ -44,11 +44,11 @@ const Textfield = ({
   ...rest
 }) => {
   let ac = autocomplete ? {...defaultAC, ...autocomplete } : undefined
-  const inputClasses = {
+  const inputClasses = classNames({
     'textfield': true,
     'has-error': error,
     [className]: className
-  }
+  })
   let inputProps = {
     className: inputClasses,
     ...rest
