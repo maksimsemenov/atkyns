@@ -1,0 +1,68 @@
+exports[`FormNav component renders without craches 1`] = `
+<div
+  className="formNav">
+  <div
+    className="formNav__header" />
+  <a
+    className="formNav__closeBtn"
+    href="/"
+    onClick={[Function anonymous]}
+    style={Object {}}>
+    <svg
+      className="formNav__closeIcon"
+      viewBox="0 0 30 30">
+      <rect
+        height="6"
+        rx="1"
+        ry="1"
+        width="6"
+        x="8"
+        y="8" />
+      <rect
+        height="6"
+        rx="1"
+        ry="1"
+        width="6"
+        x="16"
+        y="8" />
+      <rect
+        height="6"
+        rx="1"
+        ry="1"
+        width="6"
+        x="8"
+        y="16" />
+      <rect
+        height="6"
+        rx="1"
+        ry="1"
+        width="6"
+        x="16"
+        y="16" />
+    </svg>
+  </a>
+  <ul
+    className="formNav__list">
+    <li
+      className="formNavItem">
+      <a
+        className="formNavItem__link"
+        href="/case/dsadajoiho/overview"
+        onClick={[Function anonymous]}
+        style={Object {}}>
+        %stage-overview
+      </a>
+    </li>
+    <li
+      className="formNavItem">
+      <a
+        className="formNavItem__link"
+        href="/case/dsadajoiho/relative"
+        onClick={[Function anonymous]}
+        style={Object {}}>
+        %stage-relative
+      </a>
+    </li>
+  </ul>
+</div>
+`;
