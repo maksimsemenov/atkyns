@@ -43,7 +43,6 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onChange: (value, error) => {
     const { fieldName, caseId, effects, validators } = ownProps
-    console.log('value:', value, 'fieldname:', fieldName, 'caseId', caseId, effects, validators, error)
     dispatch(actions.changeDataField(caseId, fieldName, value, effects))
     if (validators && error) {
       const vError = validateValue(value, validators)
