@@ -63,6 +63,7 @@ module.exports = {
     'no-cond-assign': ['warn', 'always'],
     'no-const-assign': 'warn',
     'no-control-regex': 'warn',
+    'no-console': 'warn',
     'no-delete-var': 'warn',
     'no-dupe-args': 'warn',
     'no-dupe-class-members': 'warn',
