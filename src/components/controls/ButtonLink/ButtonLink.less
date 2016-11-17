@@ -1,0 +1,25 @@
+@import "~constants/styles.less";
+
+.button {
+  display: inline-block;
+  padding: 15px 30px;
+  cursor: pointer;
+
+  color: #fff;
+  text-decoration: none;
+  font-size: @font-size-big;
+  font-weight: @font-weight-basic;
+  background-color: @color-accent;
+  border-radius: @radius-control;
+  transition: background-color @transition-basic;
+
+  &:hover {
+    background-color: @color-accent-active;
+    transition: background-color @transition-active;
+  }
+
+  &.is-disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}
