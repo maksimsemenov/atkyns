@@ -26,10 +26,15 @@ export const date = format => value => {
     .replace('MM', '(0[1-9]|1[0-2])')
     .replace('DD', '(0[1-9]|[12][0-9]|3[01])')
     .replace('YYYY', '(19|20)[0-9]{2}'))
-    console.log(reg, format, value, reg.test(value))
 
   if (!isEmpty(value) && !reg.test(value)) {
     return l('Wrong date')
+  }
+}
+
+export const zip = value => {
+  if (!isEmpty(value) && !/^\d{5,6}(\-?\d{4})?$/.test(value)) {
+    return l('Wrong zip code')
   }
 }
 
