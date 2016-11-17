@@ -5,12 +5,12 @@ import './Selector.less'
 const Selector = ({ options = [], value = '', onChange, error, note, className }) => {
   const selectorClasses = classNames({
     'selector': true,
-    'has-value': value,
+    'has-value': value !== undefined && value !== null,
     'has-error': error,
     [className]: className
   })
   return (
-    <div className='selector__container'>
+    <div className='selector__control'>
       <ul className={selectorClasses}>
         {options.map((option, index) => {
           const optionClasses = classNames({

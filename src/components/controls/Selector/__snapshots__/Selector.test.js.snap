@@ -1,8 +1,8 @@
 exports[`Selector component renders without craches 1`] = `
 <div
-  className="selector__container">
+  className="selector__control">
   <ul
-    className="selector">
+    className="selector has-value">
     <li
       className="selector__option"
       onClick={[Function onClick]}>
