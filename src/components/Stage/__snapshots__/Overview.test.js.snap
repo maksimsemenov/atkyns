@@ -1,0 +1,110 @@
+exports[`Overview component Snapshot test 1`] = `
+<div
+  className="stage">
+  <div
+    className="stage__field">
+    <div
+      className="stage__fieldTitle">
+      Your current status
+    </div>
+    <div
+      className="stage__fieldDescription" />
+    <div
+      className="stage__fieldControl">
+      <div
+        className="selector__control">
+        <ul
+          className="selector has-value">
+          <li
+            className="selector__option"
+            onClick={[Function onClick]}>
+            US Citizen
+          </li>
+          <li
+            className="selector__option"
+            onClick={[Function onClick]}>
+            Permanent resident
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    className="stage__field">
+    <div
+      className="stage__fieldTitle">
+      Relationship
+    </div>
+    <div
+      className="stage__fieldControl">
+      <div
+        className="selector__control">
+        <ul
+          className="selector has-value">
+          <li
+            className="selector__option"
+            onClick={[Function onClick]}>
+            Spouse
+          </li>
+          <li
+            className="selector__option"
+            onClick={[Function onClick]}>
+            Parent
+          </li>
+          <li
+            className="selector__option"
+            onClick={[Function onClick]}>
+            Child
+          </li>
+          <li
+            className="selector__option"
+            onClick={[Function onClick]}>
+            Brother
+          </li>
+          <li
+            className="selector__option"
+            onClick={[Function onClick]}>
+            Sister
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    className="stage__field">
+    <div
+      className="stage__fieldTitle">
+      Is you relative now in United States?
+    </div>
+    <div
+      className="stage__fieldControl">
+      <div
+        className="selector__control">
+        <ul
+          className="selector has-value">
+          <li
+            className="selector__option"
+            onClick={[Function onClick]}>
+            Yes
+          </li>
+          <li
+            className="selector__option"
+            onClick={[Function onClick]}>
+            No
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    className="stage__controls">
+    <a
+      className="button"
+      href="/case/32sdasdljk/petitioner"
+      onClick={[Function anonymous]}
+      style={Object {}}>
+      Continue
+    </a>
+  </div>
+</div>
+`;
