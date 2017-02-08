@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import BrowserRouter from 'react-router/BrowserRouter'
-import NewCase from 'components/NewCase/NewCase'
+import NewCase from 'components/Cases/NewCase/NewCase'
 
 describe('NewCase component', () => {
   it('renders without craches', () => {

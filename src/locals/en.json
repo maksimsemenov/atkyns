@@ -23,9 +23,34 @@
   "%stage-petitioner": "Petitioner",
   "%stage-petition": "Petition",
 
-  "%sOverview-iam": "I am a",
-  "%sOverview-iapply": " and I apply for my",
-  "%sOverview-wholives": "who lives",
+  "Your current status": "Your current status",
+  "Relationship": "Relationship",
+  "Is you relative now in United States?": "Is you relative now in United States?",
 
-  "%-error-emptyField": "Couldn't be empty"
+  "%-error-emptyField": "Couldn't be empty",
+  "Wrong date": "Wrong date",
+  "Wrong zip code": "Wrong zip code",
+  "US Citizen": "US Citizen",
+  "Permanent resident": "Permanent resident",
+  "Spouse": "Spouse",
+  "Parent": "Parent",
+  "Son": "Son",
+  "Daughter": "Daughter",
+  "Brother": "Brother",
+  "Sister": "Sister",
+
+  "Yes": "Yes",
+  "No": "No",
+
+  "First": "First",
+  "Last": "Last",
+  "Middle": "Middle",
+  "Other": "Other names",
+
+  "MM/DD/YYYY": "MM/DD/YYYY",
+  "Street adress": "Street adress",
+  "Apt.": "Apt.",
+  "City": "City",
+  "State": "State",
+  "Zip code": "Zip code"
 }

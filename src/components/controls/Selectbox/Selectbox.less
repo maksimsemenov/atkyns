@@ -5,13 +5,15 @@
   max-width: 100%;
 }
 .selectbox {
+  position: relative;
+  z-index: 1;
   appearance: none;
   width: 100%;
   box-sizing: border-box;
   padding: 10px 10px 12px;
 
   border-radius: @radius-control;
-  background-color: #fafafa;
+  background-color: #ffffff;
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="10px" viewBox="0 0 16 10" fill="none"><polyline stroke="@{font-color-light}" stroke-width="1" points="1,1 8,9 15,1"/></svg>');
   background-repeat: no-repeat;
   background-position: ~"calc(100% - 12px)" center;
@@ -39,6 +41,31 @@
   &.has-error {
     border-color: @color-red;
     box-shadow: 0 0 3px 0 fade(@color-red, 30%);
+  }
+
+  .stage__fieldColumn &,
+  .stage__fieldRow & {
+    border-radius: 0;
+
+    &:hover {
+      z-index: 2;
+    }
+    &:active,
+    &:focus {
+      z-index: 3;
+    }
+  }
+  .stage__fieldRow.is-first &.is-first {
+    border-top-left-radius: @radius-control;
+  }
+  .stage__fieldRow.is-last &.is-first {
+    border-bottom-left-radius: @radius-control;
+  }
+  .stage__fieldRow.is-first &.is-last {
+    border-top-right-radius: @radius-control;
+  }
+  .stage__fieldRow.is-last &.is-last {
+    border-bottom-right-radius: @radius-control;
   }
 }
 

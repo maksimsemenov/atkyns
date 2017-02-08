@@ -82,20 +82,7 @@ describe('Case initialState function', () => {
     const nextState = fromJS({
       stage: STAGE_OVERVIEW,
       payment: PAYMENT_NONE,
-      data: {
-        relashionship: {
-          value: '',
-          disable: false
-        },
-        relByAdoption: {
-          value: '',
-          disable: false
-        },
-        resThroughAdoption: {
-          value: '',
-          disable: false
-        }
-      }
+      data: {}
     })
     expect(fromCase.initialState(fields)).toEqual(nextState)
   })

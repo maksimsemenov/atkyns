@@ -1,11 +1,8 @@
 import { fromJS } from 'immutable'
-import values from 'lodash/values'
 import casesReducer, * as fromCases from 'reducers/cases'
-import { initialData} from 'reducers/case'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
 import { ADD_CASE, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'reducers/cases'
 import { STAGE_OVERVIEW, STAGE_PETITIONER } from 'constants/stages'
-import * as DFN from 'constants/dataFieldNames'
 
 describe('Cases reducer', () => {
   it('handles ADD_CASE action', () => {
@@ -13,7 +10,7 @@ describe('Cases reducer', () => {
       jlfdsfsd: {
         stage: STAGE_OVERVIEW,
         payment: PAYMENT_NONE,
-        data: initialData(values(DFN))
+        data: {}
       }
     })
     const action = { type: ADD_CASE, caseId: 'jlfdsfsd' }

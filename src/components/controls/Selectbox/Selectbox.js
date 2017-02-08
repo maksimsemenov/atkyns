@@ -3,7 +3,16 @@ import classNames from 'classnames'
 import l from 'utils/local'
 import './Selectbox.less'
 
-const Selectbox = ({ options, value = '', placeholder, onChange, error, note, className, ...rest }) => {
+const Selectbox = ({
+  options,
+  value = '',
+  placeholder,
+  onChange,
+  error,
+  note,
+  className,
+  wrapperStyle,
+  ...rest }) => {
   const selectClasses = classNames({
     'selectbox': true,
     'has-value': value,
@@ -11,7 +20,7 @@ const Selectbox = ({ options, value = '', placeholder, onChange, error, note, cl
     [className]: className
   })
   return (
-    <div className='selectbox__control'>
+    <div className='selectbox__control' style={wrapperStyle}>
       <select
         className={selectClasses}
         value={value}

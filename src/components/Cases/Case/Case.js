@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import Link from 'react-router/Link'
 import ProgressBar from 'components/ProgressBar/ProgressBar'
-import CaseDelete from 'components/Case/CaseDelete'
+import CaseDelete from './CaseDelete'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
 import { STAGE_OVERVIEW, STAGE_PETITIONER, STAGE_RELATIVE, STAGE_PETITION } from 'constants/stages'
 import l from 'utils/local'

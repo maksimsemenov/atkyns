@@ -1,6 +1,7 @@
 exports[`Selectbox component Snapshot test 1`] = `
 <div
-  className="selectbox__control">
+  className="selectbox__control"
+  style={undefined}>
   <select
     className="selectbox has-value"
     onChange={[Function onChange]}

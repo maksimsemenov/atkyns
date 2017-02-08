@@ -1,26 +1,26 @@
 /* @flow */
 import type { ActionT } from 'types/ActionT'
 
-import { fromJS } from 'immutable'
-import values from 'lodash/values'
+import { fromJS, List, Map } from 'immutable'
+// import values from 'lodash/values'
 import { actionTypes } from 'reducers/cases'
 import { STAGE_OVERVIEW } from 'constants/stages'
 import { PAYMENT_NONE } from 'constants/paymentStatuses'
-import * as DFN from 'constants/dataFieldNames'
-
-export const initialData = (fields: string[]) => (
-  fields.reduce((newData, fieldName) => {
-    newData[fieldName] = { value: '', disable: false }
-    return newData
-  }, {})
-)
-export const initialState = (fieldMap) => fromJS({
+// import * as DFN from 'constants/dataFieldNames'
+//
+// export const initialData = (fields: string[]) => (
+//   fields.reduce((newData, fieldName) => {
+//     newData[fieldName] = { value: '', disable: false }
+//     return newData
+//   }, {})
+// )
+export const initialState = () => fromJS({
   stage: STAGE_OVERVIEW,
   payment: PAYMENT_NONE,
-  data: initialData(values(fieldMap))
+  data: {}
 })
 
-const caseReducer = (state: Map<string, any> = initialState(DFN), action: ActionT) => {
+const caseReducer = (state: Map<string, any> = initialState(), action: ActionT) => {
   switch (action.type) {
     case actionTypes.CHANGE_FIELD:
       const { fieldName = '', value } = action
@@ -54,7 +54,10 @@ export const getPaymentStatuse = (state: Map<string, any> = fromJS({})) => state
 export const getData = (state: Map<string, any> = fromJS({})) => state.get('data', fromJS({})).toJS()
 export const getDataField = (state: Map<string, any> = fromJS({}), fieldName: string = '') => {
   const path = fieldName.split('.')
-  return state.getIn(['data', ...path], '')
+  const field = state.getIn(['data', ...path], '')
+  return List.isList(field) || Map.isMap(field) ?
+    field.toJS() :
+    field
 }
 export const getDataFields = (state: Map<string, any> = fromJS({}), fields: string[] = []) => (
   fields.reduce((fMap, fieldName) => {

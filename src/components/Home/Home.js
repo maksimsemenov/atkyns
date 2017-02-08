@@ -22,7 +22,7 @@ const Home = ({ isListEmpty = false, isTrashEmpty = true }) => {
         <h1 className={tittleClasses}>{tittle}</h1>
         <Cases />
       </div>
-      {isTrashEmpty ? <TrashLink /> : null}
+      {!isTrashEmpty ? <TrashLink /> : null}
       <Match exactly pattern='/trash' component={Trash} />
     </div>
   )
