@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import Link from 'react-router/Link'
+import Link from 'react-router-dom/Link'
 import { getCasesList } from 'reducers'
 import { actions } from 'reducers/cases'
 import l from 'utils/local'
@@ -9,7 +9,7 @@ import './Trash.less'
 const Trash = ({ cases = [], onCaseRestore }) => (
   <div className='trash'>
     <h2 className='trash__title'>{l('%trashTitle')}</h2>
-    <Link to='/' className='trash__close' isActive={() => false} />
+    <Link to='/' className='trash__close' />
     <ul className='trash__cases'>
       {cases.map(c => (
         <li key={c.id} className='trash__case'>

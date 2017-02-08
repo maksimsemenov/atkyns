@@ -101,8 +101,7 @@ exports[`Overview component Snapshot test 1`] = `
     <a
       className="button"
       href="/case/32sdasdljk/petitioner"
-      onClick={[Function anonymous]}
-      style={Object {}}>
+      onClick={[Function anonymous]}>
       Continue
     </a>
   </div>

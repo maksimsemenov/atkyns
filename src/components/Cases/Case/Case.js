@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import Link from 'react-router/Link'
+import Link from 'react-router-dom/Link'
 import ProgressBar from 'components/ProgressBar/ProgressBar'
 import CaseDelete from './CaseDelete'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'

@@ -1,6 +1,7 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
 import { Provider } from 'react-redux'
+import Router from 'react-router-dom/BrowserRouter'
 import configureStore from 'configureStore'
 import Overview from 'components/Stage/Overview'
 
@@ -10,7 +11,9 @@ describe('Overview component', () => {
     const tree = renderer
       .create(
         <Provider store={store}>
-          <Overview caseId='32sdasdljk' />
+          <Router>
+            <Overview caseId='32sdasdljk' />
+          </Router>
         </Provider>
       )
       .toJSON()

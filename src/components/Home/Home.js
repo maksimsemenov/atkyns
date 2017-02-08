@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Match } from 'react-router'
+import Route from 'react-router-dom/Route'
 import classNames from 'classnames'
 import Cases from 'components/Cases/Cases'
 import Trash from 'components/Trash/Trash'
@@ -23,7 +23,7 @@ const Home = ({ isListEmpty = false, isTrashEmpty = true }) => {
         <Cases />
       </div>
       {!isTrashEmpty ? <TrashLink /> : null}
-      <Match exactly pattern='/trash' component={Trash} />
+      <Route exact path='/trash' component={Trash} />
     </div>
   )
 }

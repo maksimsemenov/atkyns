@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Link from 'react-router/Link'
+import Link from 'react-router-dom/Link'
 import './ButtonLink.less'
 
 const ButtonLink = ({ children, disabled, ...rest }) => (

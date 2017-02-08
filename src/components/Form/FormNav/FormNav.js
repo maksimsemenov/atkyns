@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Link from 'react-router/Link'
+import Link from 'react-router-dom/Link'
 import FormNavItem from 'components/Form/FormNavItem/FormNavItem'
 import { STAGE_OVERVIEW, STAGE_PETITIONER, STAGE_RELATIVE, STAGE_PETITION } from 'constants/stages'
 import './FormNav.less'

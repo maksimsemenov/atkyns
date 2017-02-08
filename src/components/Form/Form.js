@@ -4,8 +4,8 @@ import FormNav from 'components/Form/FormNav/FormNav'
 import { stages } from 'constants/stages'
 import './Form.less'
 
-const Form = ({ progress = 0, params }) => {
-  const { caseId, stage } = params
+const Form = ({ progress = 0, match }) => {
+  const { caseId, stage } = match.params
   return (
     <div className='form'>
       <FormNav stages={stages} caseId={caseId} stage={stage} />
@@ -16,7 +16,12 @@ const Form = ({ progress = 0, params }) => {
 
 Form.propTypes = {
   progress: PropTypes.number,
-  params: PropTypes.object
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      caseId: PropTypes.string,
+      stage: PropTypes.string
+    })
+  })
 }
 
 export default Form

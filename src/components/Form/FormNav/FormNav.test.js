@@ -1,6 +1,6 @@
 import React from 'react'
 import renderer from 'react-test-renderer'
-import BrowserRouter from 'react-router/BrowserRouter'
+import BrowserRouter from 'react-router-dom/BrowserRouter'
 import FormNav from './FormNav'
 import { STAGE_OVERVIEW, STAGE_RELATIVE } from 'constants/stages'
 

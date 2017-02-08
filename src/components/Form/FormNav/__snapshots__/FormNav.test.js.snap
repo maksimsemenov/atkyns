@@ -6,8 +6,7 @@ exports[`FormNav component renders without craches 1`] = `
   <a
     className="formNav__closeBtn"
     href="/"
-    onClick={[Function anonymous]}
-    style={Object {}}>
+    onClick={[Function anonymous]}>
     <svg
       className="formNav__closeIcon"
       viewBox="0 0 30 30">
@@ -48,8 +47,7 @@ exports[`FormNav component renders without craches 1`] = `
       <a
         className="formNavItem__link"
         href="/case/dsadajoiho/overview"
-        onClick={[Function anonymous]}
-        style={Object {}}>
+        onClick={[Function anonymous]}>
         %stage-overview
       </a>
     </li>
@@ -58,8 +56,7 @@ exports[`FormNav component renders without craches 1`] = `
       <a
         className="formNavItem__link"
         href="/case/dsadajoiho/relative"
-        onClick={[Function anonymous]}
-        style={Object {}}>
+        onClick={[Function anonymous]}>
         %stage-relative
       </a>
     </li>

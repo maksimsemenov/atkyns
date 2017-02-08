@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import Link from 'react-router/Link'
+import Link from 'react-router-dom/Link'
 import uniqueKey from 'utils/uniqueKey'
 import l from 'utils/local'
 import { STAGE_OVERVIEW } from 'constants/stages'

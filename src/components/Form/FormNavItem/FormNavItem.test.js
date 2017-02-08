@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router'
+import BrowserRouter from 'react-router-dom/BrowserRouter'
 import FormNavItem from './FormNavItem'
 import { STAGE_OVERVIEW } from 'constants/stages'
 

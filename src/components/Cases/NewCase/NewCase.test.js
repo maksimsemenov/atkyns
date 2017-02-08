@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import BrowserRouter from 'react-router/BrowserRouter'
+import BrowserRouter from 'react-router-dom/BrowserRouter'
 import NewCase from 'components/Cases/NewCase/NewCase'
 
 describe('NewCase component', () => {
