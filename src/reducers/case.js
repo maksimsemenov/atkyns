@@ -6,6 +6,7 @@ import { fromJS, List, Map } from 'immutable'
 import { actionTypes } from 'reducers/cases'
 import { STAGE_OVERVIEW } from 'constants/stages'
 import { PAYMENT_NONE } from 'constants/paymentStatuses'
+import uniqueKey from 'utils/uniqueKey'
 // import * as DFN from 'constants/dataFieldNames'
 //
 // export const initialData = (fields: string[]) => (
@@ -14,18 +15,65 @@ import { PAYMENT_NONE } from 'constants/paymentStatuses'
 //     return newData
 //   }, {})
 // )
-export const initialState = () => fromJS({
-  stage: STAGE_OVERVIEW,
-  payment: PAYMENT_NONE,
-  data: {}
-})
+export const initialState = () => {
+  const petitionerId = uniqueKey()
+  const relativeId = uniqueKey()
+  const marriageId = uniqueKey()
+  return fromJS({
+    stage: STAGE_OVERVIEW,
+    payment: PAYMENT_NONE,
+    data: {
+      case: {
+        petitioner: petitionerId,
+        relative: relativeId,
+        relation: 'spouse'
+      },
+      marriages: {
+        [marriageId]: {
+          id: marriageId,
+          spouses: [petitionerId, relativeId]
+        }
+      },
+      persons: {
+        [petitionerId]: {
+          id: petitionerId,
+          maritalStatus: 'married',
+        },
+        [relativeId]: {
+          id: relativeId,
+          maritalStatus: 'married'
+        }
+      }
+    }
+  })
+}
+
+const updateData = (state, { patch = [] }) => {
+  if (Array.isArray(patch)) {
+    return state.withMutations(mState => {
+      patch.forEach(p => mState.setIn(['data', ...p.path.split('.')], p.value))
+      return mState
+    })
+  }
+  return state.setIn(['data', ...patch.path.split('.')], patch.value)
+}
+
+const deleteData = (state, { path = [] }) => {
+  if (Array.isArray(path)) {
+    return state.withMutations(mState => {
+      path.forEach(p => mState.deleteIn(['data', ...p.split('.')]))
+      return mState
+    })
+  }
+  return state.deleteIn(['data', ...path.split('.')])
+}
 
 const caseReducer = (state: Map<string, any> = initialState(), action: ActionT) => {
   switch (action.type) {
-    case actionTypes.CHANGE_FIELD:
-      const { fieldName = '', value } = action
-      const path = fieldName.split('.')
-      return state.setIn(['data', ...path], value)
+    case actionTypes.UPDATE_DATA:
+      return updateData(state, action)
+    case actionTypes.DELETE_DATA:
+      return deleteData(state, action)
     case actionTypes.SET_STAGE:
       return state.set('stage', action.newStage || STAGE_OVERVIEW)
     case actionTypes.SET_PAYMENT:
@@ -35,9 +83,9 @@ const caseReducer = (state: Map<string, any> = initialState(), action: ActionT) 
     case actionTypes.RESTORE_CASE:
       return state.set('deleted', false)
     case actionTypes.SET_FIELD_ERROR:
-      return state.setIn(['errors', action.fieldName], action.error)
+      return state.setIn(['errors', action.path], action.error)
     case actionTypes.REMOVE_FIELD_ERROR:
-      return state.deleteIn(['errors', action.fieldName])
+      return state.deleteIn(['errors', action.path])
     default:
       return state
   }
@@ -52,12 +100,9 @@ export default caseReducer
 export const getStage = (state: Map<string, any> = fromJS({})) => state.get('stage', 0)
 export const getPaymentStatuse = (state: Map<string, any> = fromJS({})) => state.get('payment', PAYMENT_NONE)
 export const getData = (state: Map<string, any> = fromJS({})) => state.get('data', fromJS({})).toJS()
-export const getDataField = (state: Map<string, any> = fromJS({}), fieldName: string = '') => {
-  const path = fieldName.split('.')
-  const field = state.getIn(['data', ...path], '')
-  return List.isList(field) || Map.isMap(field) ?
-    field.toJS() :
-    field
+export const getDataField = (state: Map<string, any> = fromJS({}), path: string = '') => {
+  const field = state.getIn(['data', ...path.split('.')], '')
+  return List.isList(field) || Map.isMap(field) ? field.toJS() : field
 }
 export const getDataFields = (state: Map<string, any> = fromJS({}), fields: string[] = []) => (
   fields.reduce((fMap, fieldName) => {

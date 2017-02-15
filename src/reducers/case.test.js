@@ -9,18 +9,20 @@ describe('Case reducer', () => {
     const state = fromJS({ stage: STAGE_OVERVIEW })
     expect(caseReducer(state, {})).toEqual(state)
   })
-  it('handles CHANGE_FIELD action', () => {
+  it('handles UPDATE_DATA action with one patch', () => {
     const state = fromJS({
       data: {
         petitioner: {}
       }
     })
-    const action1 = {
-      type: actionTypes.CHANGE_FIELD,
-      fieldName: 'petitioner.name.first',
-      value: 'Andy'
+    const action = {
+      type: actionTypes.UPDATE_DATA,
+      patch: {
+        path: 'petitioner.name.first',
+        value: 'Andy'
+      }
     }
-    const nextState1 = fromJS({
+    const nextState = fromJS({
       data: {
         petitioner: {
           name: {
@@ -30,7 +32,101 @@ describe('Case reducer', () => {
       }
     })
 
-    expect(caseReducer(state, action1)).toEqual(nextState1)
+    expect(caseReducer(state, action)).toEqual(nextState)
+  })
+  it('handles UPDATE_DATA action with array of patches', () => {
+    const state = fromJS({
+      data: {
+        petitioner: {},
+        persons: {},
+        marriages: {}
+      }
+    })
+    const action = {
+      type: actionTypes.UPDATE_DATA,
+      patch: [{
+        path: 'marriages.543.spouses.0',
+        value: '324'
+      }, {
+        path: 'persons.324.name.first',
+        value: 'Andy'
+      }]
+    }
+    const nextState = fromJS({
+      data: {
+        petitioner: {},
+        persons: {
+          324: {
+            name: {
+              first: 'Andy'
+            }
+          }
+        },
+        marriages: {
+          543: {
+            spouses: {
+              0: '324'
+            }
+          }
+        }
+      }
+    })
+
+    expect(caseReducer(state, action)).toEqual(nextState)
+  })
+  it('handles DELETE_DATA action with one path', () => {
+    const action = {
+      type: actionTypes.DELETE_DATA,
+      path: 'petitioner.name.first'
+    }
+    const state = fromJS({
+      data: {
+        petitioner: {
+          name: {
+            first: 'Andy'
+          }
+        }
+      }
+    })
+    const nextState = fromJS({
+      data: { petitioner: { name: {} } }
+    })
+
+    expect(caseReducer(state, action)).toEqual(nextState)
+  })
+  it('handles DELETE_DATA action with array of pathes', () => {
+    const action = {
+      type: actionTypes.DELETE_DATA,
+      path: ['persons.324', 'marriages.543.spouses.0']
+    }
+    const state = fromJS({
+      data: {
+        petitioner: {},
+        persons: {
+          324: {
+            name: {
+              first: 'Andy'
+            }
+          }
+        },
+        marriages: {
+          543: {
+            spouses: {
+              0: '324'
+            }
+          }
+        }
+      }
+    })
+    const nextState = fromJS({
+      data: {
+        petitioner: {},
+        persons: {},
+        marriages: { 543: { spouses: {} } }
+      }
+    })
+
+    expect(caseReducer(state, action)).toEqual(nextState)
   })
   it('handles SET_STAGE action', () => {
     const state = fromJS({ stage: STAGE_OVERVIEW })
@@ -56,7 +152,7 @@ describe('Case reducer', () => {
     const state = fromJS({})
     const action = {
       type: actionTypes.SET_FIELD_ERROR,
-      fieldName: 'petitioner',
+      path: 'petitioner',
       error: '%error-emptyField'
     }
     expect(caseReducer(state, action))
@@ -66,27 +162,13 @@ describe('Case reducer', () => {
     const state = fromJS({ errors: { petitioner: '%error-emptyField' } })
     const action = {
       type: actionTypes.SET_FIELD_ERROR,
-      fieldName: 'petitioner'
+      path: 'petitioner'
     }
     expect(caseReducer(state, action))
       .toEqual(fromJS({ errors: { petitioner: undefined } }))
   })
 })
-describe('Case initialState function', () => {
-  it('produces correct initial state from map', () => {
-    const fields = {
-      RELASHIONSHIP: 'relashionship',
-      REL_BY_ADOPTION: 'relByAdoption',
-      RES_THROUGH_ADOPTION: 'resThroughAdoption'
-    }
-    const nextState = fromJS({
-      stage: STAGE_OVERVIEW,
-      payment: PAYMENT_NONE,
-      data: {}
-    })
-    expect(fromCase.initialState(fields)).toEqual(nextState)
-  })
-})
+
 it ('getStage selector returns correct value', () => {
   const state = fromJS({
     stage: STAGE_OVERVIEW

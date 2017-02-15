@@ -1,21 +1,10 @@
 import { fromJS } from 'immutable'
 import casesReducer, * as fromCases from 'reducers/cases'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
-import { ADD_CASE, SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'reducers/cases'
+import { SET_STAGE, SET_PAYMENT, DELETE_CASE, RESTORE_CASE } from 'reducers/cases'
 import { STAGE_OVERVIEW, STAGE_PETITIONER } from 'constants/stages'
 
 describe('Cases reducer', () => {
-  it('handles ADD_CASE action', () => {
-    const nextState = fromJS({
-      jlfdsfsd: {
-        stage: STAGE_OVERVIEW,
-        payment: PAYMENT_NONE,
-        data: {}
-      }
-    })
-    const action = { type: ADD_CASE, caseId: 'jlfdsfsd' }
-    expect(casesReducer(undefined, action)).toEqual(nextState)
-  })
   it('handle SET_STAGE action', () => {
     const state = fromJS({
       fdfdfa: { stage: 4 },
@@ -375,29 +364,6 @@ it ('getDataFieldError selector returns correct value', () => {
 /*
  * Action creators
  */
-
-it('emits events for action effects', () => {
- let register = {}
- const dispatch = (action) => {
-   if (typeof action === 'function') {
-     action(dispatch)
-   } else {
-     register.caseId = action.caseId
-     register[action.fieldName] = action.value
-   }
- }
- const effects = [{
-   fieldName: 'secondName',
-   effect: () => 'Smith'
- }]
- const nextRegister = {
-   caseId: '0f',
-   firstName: 'Andy',
-   secondName: 'Smith',
- }
- dispatch(fromCases.actions.changeDataField('0f', 'firstName', 'Andy', effects))
- expect(register).toEqual(nextRegister)
-})
 
 it('setFieldError action creator', () => {
   expect(fromCases.actions.setFieldError('dsadhaskld', 'petitioner.name.first', '%error-emptyField')).toMatchSnapshot()

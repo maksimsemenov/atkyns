@@ -1,5 +1,5 @@
 /* @flow */
-import type { ActionT } from 'types/ActionT'
+import type { ActionT, DataPatchT } from 'types/ActionT'
 import type { DataFieldPatchT, DataFieldEffectT } from 'types/DataFieldT'
 
 import { fromJS } from 'immutable'
@@ -12,7 +12,8 @@ import * as DFN from 'constants/dataFieldNames'
 /*
  * Action types
  */
-export const CHANGE_FIELD = 'CHANGE_FIELD'
+export const UPDATE_DATA = 'UPDATE_DATA'
+export const DELETE_DATA = 'DELETE_DATA'
 export const SET_FIELD_ERROR = 'SET_FIELD_ERROR'
 export const REMOVE_FIELD_ERROR = 'REMOVE_FIELD_ERROR'
 
@@ -24,7 +25,8 @@ export const SET_STAGE = 'SET_STAGE'
 export const SET_PAYMENT = 'SET_PAYMENT'
 
 export const actionTypes = {
-  CHANGE_FIELD,
+  UPDATE_DATA,
+  DELETE_DATA,
   SET_FIELD_ERROR,
   REMOVE_FIELD_ERROR,
   ADD_CASE,
@@ -42,7 +44,7 @@ const cases = (state: Map<string, any> = fromJS({}), action: ActionT) => {
   switch (action.type) {
     case ADD_CASE:
       return state.set(action.caseId, caseReducer(undefined, action))
-    case CHANGE_FIELD:
+    case UPDATE_DATA:
     case SET_STAGE:
     case SET_PAYMENT:
     case DELETE_CASE:
@@ -122,19 +124,11 @@ export const getCasesList = (state: Map<string, any> = fromJS({}), deleted: bool
  * Actions
  */
 
-const setDataField = (caseId: string, fieldName: string, value: DataFieldPatchT) =>
-  ({ type: CHANGE_FIELD, caseId, fieldName, value })
+export const updateData = (caseId: string, patch: Array<DataPatchT> | DataPatchT): ActionT =>
+  ({ type: UPDATE_DATA, caseId, patch })
+export const deleteData = (caseId: string, path: Array<string> | string): ActionT =>
+  ({ type: DELETE_DATA, caseId, path })
 
-const changeDataField = (
-  caseId: string,
-  fieldName: string,
-  value: DataFieldPatchT,
-  effects?: DataFieldEffectT[]) => (dispatch: any) => {
-  dispatch(setDataField(caseId, fieldName, value))
-  if (effects) {
-    effects.forEach((ef) => dispatch(setDataField(caseId, ef.fieldName, ef.effect(value))))
-  }
-}
 
 const setFieldError = (caseId: string, fieldName: string, error: string) =>
   ({ type: SET_FIELD_ERROR, caseId, fieldName, error })
@@ -149,7 +143,8 @@ const setStage = (caseId: string, newStage: string) => ({ type: SET_STAGE, caseI
 const setPayment = (caseId: string, newPaymentStatuse: string) => ({ type: SET_PAYMENT, caseId, newPaymentStatuse })
 
 export const actions = {
-  changeDataField,
+  updateData,
+  deleteData,
   setFieldError,
   removeFieldError,
   addCase,
