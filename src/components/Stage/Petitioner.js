@@ -7,15 +7,16 @@ import { getCaseDataField } from 'reducers'
 import l from 'utils/local'
 import Field from 'components/controls/Field'
 import Textfield from 'components/controls/Textfield/Textfield'
-import Selectbox from 'components/controls/Selectbox/Selectbox'
 import Selector from 'components/controls/Selector/Selector'
 import maskString from 'utils/maskString'
 import { date, zip } from 'utils/validators'
 import * as fields from 'constants/dataFieldNames'
-import US_STATES from 'constants/usStates'
+import PriorMarriages from 'components/modules/PriorMarriages/PriorMarriages'
+
 
 const Petitioner = ({
   caseId,
+  petitionerId,
   pStatus,
   relationship,
   rUSStatus,
@@ -231,47 +232,14 @@ const Petitioner = ({
     }
     <div className='stage__field'>
       <div className='stage__fieldTitle'>{l('Prior marriages')}</div>
-      <div className='stage__fieldControl'>
-        <div className='stage__fieldColumn'>
-          <div className='stage__fieldRow is-first'>
-            <Field
-              fieldName={`petitioner.marriages.prior.${priorMarriages.length}.name.first`}
-              caseId={caseId}
-              component={Textfield}
-              placeholder={l('Spouse first name')}
-              className='is-first'
-              wrapperStyle={{ width: '150px', flexShrink: 0, marginRight: '-1px'}}
-            />
-            <Field
-              fieldName={`petitioner.marriages.prior.${priorMarriages.length}.name.family`}
-              caseId={caseId}
-              component={Textfield}
-              placeholder={l('Last (maiden) name')}
-              wrapperStyle={{ width: '160px', marginRight: '-1px'}}
-            />
-            <Field
-              fieldName={fields.P_PMARRIAGE_STATE}
-              caseId={caseId}
-              component={Textfield}
-              placeholder={l('State')}
-              wrapperStyle={{ width: '120px', marginRight: '-1px'}}
-            />
-            <Field
-              fieldName={fields.P_PMARRIAGE_COUNTRY}
-              caseId={caseId}
-              component={Textfield}
-              placeholder={l('Country')}
-              className='is-last'
-            />
-          </div>
-        </div>
-      </div>
+      <PriorMarriages caseId={caseId} personId={petitionerId}/>
     </div>
   </div>
 )
 
 Petitioner.propTypes = {
   caseId: PropTypes.string.isRequired,
+  petitionerId: PropTypes.string.isRequired,
   pStatus: PropTypes.string.isRequired,
   relationship: PropTypes.string.isRequired,
   rUSStatus: PropTypes.bool,
@@ -279,12 +247,12 @@ Petitioner.propTypes = {
   priorMarriages: PropTypes.arrayOf(PTPriorMarriage)
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  pStatus: getCaseDataField(state, ownProps.caseId, fields.P_STATUS_TYPE),
-  relationship: getCaseDataField(state, ownProps.caseId, fields.RELASHIONSHIP),
-  rUSStatus: getCaseDataField(state, ownProps.caseId, fields.R_USV_CURRENT_STATUS),
-  pMaritalStatus: getCaseDataField(state, ownProps.caseId, fields.P_MARITAL_STATUS),
-  priorMarriages: getCaseDataField(state, ownProps.caseId, 'petitioner.marriages.prior')
+const mapStateToProps = (state, { caseId }) => ({
+  pStatus: getCaseDataField(state, caseId, fields.P_STATUS_TYPE),
+  relationship: getCaseDataField(state, caseId, fields.RELASHIONSHIP),
+  rUSStatus: getCaseDataField(state, caseId, fields.R_USV_CURRENT_STATUS),
+  pMaritalStatus: getCaseDataField(state, caseId, fields.P_MARITAL_STATUS),
+  petitionerId: getCaseDataField(state, caseId, 'case.petitioner')
 })
 
 export default connect(mapStateToProps)(Petitioner)
