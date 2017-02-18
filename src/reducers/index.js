@@ -37,8 +37,8 @@ export const getCasePaymentStatuse = (state: Map<string, any> = fromJS({}), case
 export const getCaseData = (state: Map<string, any> = fromJS({}), caseId: string) =>
   fromCases.getCaseData(state.get('cases'), caseId)
 
-export const getCaseDataField = (state: Map<string, any> = fromJS({}), caseId: string, fieldName: string) =>
-  fromCases.getCaseDataField(state.get('cases'), caseId, fieldName)
+export const getCaseDataField = (state: Map<string, any> = fromJS({}), caseId: string, path: string): any =>
+  fromCases.getCaseDataField(state.get('cases'), caseId, path)
 
 export const getCaseDataFieldError = (
   state: Map<string, any> = fromJS({}),

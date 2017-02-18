@@ -3,6 +3,7 @@ import caseReducer, * as fromCase from 'reducers/case'
 import { PAYMENT_NONE, PAYMENT_FULL } from 'constants/paymentStatuses'
 import { actionTypes } from 'reducers/cases'
 import { STAGE_OVERVIEW } from 'constants/stages'
+import { getMarriagesForPerson } from 'reducers/case'
 
 describe('Case reducer', () => {
   it('returns state for default action', () => {
@@ -45,8 +46,8 @@ describe('Case reducer', () => {
     const action = {
       type: actionTypes.UPDATE_DATA,
       patch: [{
-        path: 'marriages.543.spouses.0',
-        value: '324'
+        path: 'marriages.543.spouses',
+        value: ['324', '213']
       }, {
         path: 'persons.324.name.first',
         value: 'Andy'
@@ -64,9 +65,7 @@ describe('Case reducer', () => {
         },
         marriages: {
           543: {
-            spouses: {
-              0: '324'
-            }
+            spouses: ['324', '213']
           }
         }
       }
@@ -97,7 +96,7 @@ describe('Case reducer', () => {
   it('handles DELETE_DATA action with array of pathes', () => {
     const action = {
       type: actionTypes.DELETE_DATA,
-      path: ['persons.324', 'marriages.543.spouses.0']
+      path: ['persons.324', 'marriages.543']
     }
     const state = fromJS({
       data: {
@@ -122,7 +121,7 @@ describe('Case reducer', () => {
       data: {
         petitioner: {},
         persons: {},
-        marriages: { 543: { spouses: {} } }
+        marriages: {}
       }
     })
 
@@ -252,4 +251,44 @@ it ('getDataFieldError selector returns correct value', () => {
     .toEqual('%error-emptyField')
   expect(fromCase.getDataFieldError(state, 'petitioner.name.second'))
     .toBeUndefined()
+})
+
+describe('getMarriagesForPerson', () => {
+  it('return correct marriages', () => {
+    const state = fromJS({
+      cases: {
+        123: {
+          data: {
+            marriages: {
+              324: { spouses: ['312', '543'] },
+              432: { spouses: ['312', '098'] },
+              985: { spouses: ['543', '673'] }
+            }
+          }
+        }
+      }
+    })
+    expect(getMarriagesForPerson(state, '123', '312')).toEqual(fromJS({
+      324: { spouses: ['312', '543'] },
+      432: { spouses: ['312', '098'] }
+    }))
+  })
+  it('return empty map if no marriages exist', () => {
+    it('return correct marriages', () => {
+      const state = fromJS({
+        cases: {
+          123: {
+            data: {
+              marriages: {
+                324: { spouses: ['312', '543'] },
+                432: { spouses: ['312', '098'] },
+                985: { spouses: ['543', '673'] }
+              }
+            }
+          }
+        }
+      })
+      expect(getMarriagesForPerson(state, '123', '592')).toEqual(fromJS({}))
+    })
+  })
 })

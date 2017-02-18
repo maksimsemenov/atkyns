@@ -1,12 +1,11 @@
 /* @flow */
-export type DataItemT = ?string | number | boolean
-export type DataPatchT = { patch: string, value: DataPatchT }
+export type DataPatchT = { path: string, value: any }
 
 export type ActionT = {
   type: string,
   caseId?: string,
   path?: string[] | string,
   patch?: DataPatchT[] | DataPatchT,
-  value?: DataItemT,
+  value?: any,
   error?: string
 }

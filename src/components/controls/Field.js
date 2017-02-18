@@ -28,7 +28,7 @@ Field.propTypes = {
   ]).isRequired,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
-  effects: PropTypes.object,
+  effects: PropTypes.func,
   validators: PropTypes.arrayOf(PropTypes.func)
 }
 
@@ -43,7 +43,11 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onChange: (value, error) => {
     const { fieldName, caseId, effects, validators } = ownProps
-    dispatch(actions.changeDataField(caseId, fieldName, value, effects))
+    const patch = effects ?
+      [{ path: fieldName, value }, ...effects(value)] :
+      { path: fieldName, value }
+      
+    dispatch(actions.updateData(caseId, patch))
     if (validators && error) {
       const vError = validateValue(value, validators)
       if (vError && vError !== error) {

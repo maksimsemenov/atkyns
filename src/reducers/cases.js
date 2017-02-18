@@ -45,6 +45,7 @@ const cases = (state: Map<string, any> = fromJS({}), action: ActionT) => {
     case ADD_CASE:
       return state.set(action.caseId, caseReducer(undefined, action))
     case UPDATE_DATA:
+    case DELETE_DATA:
     case SET_STAGE:
     case SET_PAYMENT:
     case DELETE_CASE:

@@ -3,11 +3,12 @@
 export type MarriageT = {
   id: string,
   spouses: [string, string],
-  start: {
+  current: bool,
+  start?: {
     date: string,
     place: string
   },
-  end: {
+  end?: {
     date: string,
     place: string
   }

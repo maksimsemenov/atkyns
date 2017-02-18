@@ -31,7 +31,8 @@ export const initialState = () => {
       marriages: {
         [marriageId]: {
           id: marriageId,
-          spouses: [petitionerId, relativeId]
+          spouses: [petitionerId, relativeId],
+          current: true
         }
       },
       persons: {
@@ -51,11 +52,11 @@ export const initialState = () => {
 const updateData = (state, { patch = [] }) => {
   if (Array.isArray(patch)) {
     return state.withMutations(mState => {
-      patch.forEach(p => mState.setIn(['data', ...p.path.split('.')], p.value))
+      patch.forEach(p => mState.setIn(['data', ...p.path.split('.')], fromJS(p.value)))
       return mState
     })
   }
-  return state.setIn(['data', ...patch.path.split('.')], patch.value)
+  return state.setIn(['data', ...patch.path.split('.')], fromJS(patch.value))
 }
 
 const deleteData = (state, { path = [] }) => {
@@ -114,3 +115,10 @@ export const getDataFieldError = (
   state: Map<string, any> = fromJS({}),
   fieldName: string = ''
 ) => state.getIn(['errors', fieldName])
+
+export const getMarriagesForPerson = (
+  state: Map<string, any> = fromJS({}),
+  caseId: string,
+  personId: string
+): Map<string, any> => state.getIn(['cases', caseId, 'data', 'marriages'], Map())
+  .filter(m => m.get('spouses').includes(personId))
